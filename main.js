@@ -1,14 +1,17 @@
 window.addEventListener("load", async (event) => {    
     // Get Template Page
-    const templateSRC = await (await (await fetch(chrome.runtime.getURL("page_template.html"))).text());
+    let browserHandle = (typeof browser != 'undefined') ? browser : chrome;
+
+    const templateSRC = await (await (await fetch(browserHandle.runtime.getURL("page_template.html"))).text());
 
     // Copy the page's content into the template and make it the current DOM
     let bodySRC = document.getElementsByClassName("pagebodydiv")[0].innerHTML;
     document.getElementsByTagName("html")[0].innerHTML = templateSRC;
     document.getElementById("GTUI_pageContent").innerHTML = bodySRC;
 
-    // Insert Logo
-    document.getElementById("GTUI_gtLogo").src = chrome.runtime.getURL("gt-logo.svg");
+    // Insert Logos
+    document.getElementById("GTUI_gtLogo").src = browserHandle.runtime.getURL("gt-logo.svg");
+    document.getElementById("GTUI_githubLogo").src = browserHandle.runtime.getURL("github-logo.svg");
 
     // Make Prettier Menus
     let mpts = document.getElementsByClassName("menuplaintable");
@@ -25,6 +28,7 @@ window.addEventListener("load", async (event) => {
 
         let menuDiv = document.createElement("div");
         menuDiv.className = "container-fluid";
+        menuDiv.className = "GTUI_GridNavMenu";
 
         let menuItemIdx = 0;
         let colCount    = 4;
@@ -32,14 +36,10 @@ window.addEventListener("load", async (event) => {
             let row = document.createElement("div");
             row.className = "row";
 
-            if (rowIdx > 0) {
-                row.className += " mt-3";
-            }
-
             for (let colIdx = 0; colIdx < colCount; colIdx++) {
                 if (menuItemIdx < menuData.length) { // TODO: integrate this check into the loop
                     let col = document.createElement("div");
-                    col.className = "col-xs-12 col-sm-6 col-md-4 col-lg-3";
+                    col.className = "col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3";
                     col.innerHTML += menuData[menuItemIdx].replace(/&nbsp;/g,'');
 
                     for (let link of Array.from(col.getElementsByTagName("a"))) {

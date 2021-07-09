@@ -19,7 +19,8 @@
         {
             "resources": [
                 "page_template.html",
-                "gt-logo.svg"
+                "gt-logo.svg",
+                "github-logo.svg"
             ],
             "matches": [
                 "https://oscar.gatech.edu/*"

@@ -19,23 +19,32 @@
 			transition: color linear 0.25s;
 		}
 
-        div#GTUI_pageContent_menu {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            grid-auto-rows: auto;
+        body {
+            min-height: 100vh;
         }
 
-        div#GTUI_pageContent_menu_item {
-            border: 1px solid black;
-            padding: 5%;
-            border-radius: 10px;
-        }
-
-        div#GTUI_pageContent_menu_item > a {
+        div.GTUI_GridNavMenu a {
             text-align: center;
             width: 100%;
             display: block;
+
+            white-space: normal;
+
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+        }
+
+        div.GTUI_GridNavMenu span.menulinkdesctext {
+            text-align: justify;
+            display: block;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0px;
+            color: #FFFFFF;
         }
 	</style>
 </head>
@@ -82,10 +91,29 @@
 		</header>
 
 		<main>
-			<div class="container mt-3" id="GTUI_pageContent">
+			<div class="container mt-2" id="GTUI_pageContent">
 				
 			</div>
 		</main>
+
+        <footer class="navbar-dark bg-dark container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 d-flex">
+                        <span class="justify-content-center align-self-center">&copy; Henry LE BERRE 2021</span>
+                    </div>
+                    <div class="col-4">
+
+                    </div>
+                    <div class="col-4 d-flex justify-content-end" style="text-align: right;">
+                        <a target="_blank" href="https://www.github.com/henryleberre/GT-UI" class="navbar-brand">
+                            <img id="GTUI_githubLogo" width="16" />
+                            <span class="align-self-center">/ GT-UI</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
