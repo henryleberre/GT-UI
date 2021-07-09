@@ -1,0 +1,29 @@
+{
+    "manifest_version": 3,
+
+    "name": "GT-UI",
+    "version": "1.0",
+
+    "content_scripts": [
+        {
+            "matches": [
+                "https://oscar.gatech.edu/*"
+            ],
+            "js": [
+                "main.js"
+            ]
+        }
+    ],
+    
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "page_template.html",
+                "gt-logo.svg"
+            ],
+            "matches": [
+                "https://oscar.gatech.edu/*"
+            ]
+        }
+    ]
+}
