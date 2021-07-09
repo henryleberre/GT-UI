@@ -13,6 +13,19 @@ window.addEventListener("load", async (event) => {
     document.getElementById("GTUI_gtLogo").src = browserHandle.runtime.getURL("gt-logo.svg");
     document.getElementById("GTUI_githubLogo").src = browserHandle.runtime.getURL("github-logo.svg");
 
+    // Top Menu: Show active page/menu item
+    let topMenuLinks = document.getElementById("GTUI_navbar_menu").getElementsByTagName("a");
+    let topMenuGetParams = ["P_GenMnu", "P_MainCSMnu", "P_StuMainMnu", "P_AdmMnu"];
+
+    let paramIdx = 0;
+    for (let param of topMenuGetParams) {
+        if (window.location.href.endsWith(param)) {
+            topMenuLinks[paramIdx].style.color = "#f2c83f";
+            break;
+        }
+        paramIdx++;
+    }
+
     // Make Prettier Menus
     let mpts = document.getElementsByClassName("menuplaintable");
     if (mpts.length > 0) {
@@ -21,7 +34,9 @@ window.addEventListener("load", async (event) => {
         for (td of mpts[0].getElementsByTagName("td")) {
             if (Array.from(td.getElementsByTagName("a")).length > 0) {
                 if (td.innerText != "") {
-                    menuData.push(td.innerHTML);
+                    let elemHTML = td.innerHTML.replace(/&nbsp;/g,'');
+
+                    menuData.push(elemHTML);
                 }
             }
         }
@@ -40,7 +55,27 @@ window.addEventListener("load", async (event) => {
                 if (menuItemIdx < menuData.length) { // TODO: integrate this check into the loop
                     let col = document.createElement("div");
                     col.className = "col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3";
-                    col.innerHTML += menuData[menuItemIdx].replace(/&nbsp;/g,'');
+                    col.innerHTML += menuData[menuItemIdx];
+
+                    let colDescDiv = col.getElementsByClassName("menulinkdesctext")[0];
+
+                    // Transform the description into a <ul><li> list
+                    if (colDescDiv != undefined) {
+                        let descHTML = colDescDiv.innerHTML;
+                        if (descHTML.includes(";")) {
+                            let newDescHTML = "<ul>";
+                            
+                            for (let item of descHTML.split(";")) {
+                                newDescHTML += "<li>" + item.trim() + "</li>";
+                            }
+
+                            newDescHTML += "</ul>";
+
+                            descHTML = newDescHTML;
+                        }
+
+                        colDescDiv.innerHTML = descHTML;
+                    }
 
                     for (let link of Array.from(col.getElementsByTagName("a"))) {
                         if (link.innerText == "") {

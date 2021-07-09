@@ -15,7 +15,7 @@
         }
 
 		a.nav-link:hover {
-			color: #f2c83f;
+			color: #f2c83f !important;
 			transition: color linear 0.25s;
 		}
 
@@ -30,10 +30,13 @@
 
             white-space: normal;
 
-            height: 50px;
+            font-weight: bolder;
+
+            height: 70px;
 
             display: flex;
             align-items: center;
+            justify-content: center;
         }
 
         div.GTUI_GridNavMenu span.menulinkdesctext {
@@ -41,16 +44,33 @@
             display: block;
         }
 
+        div.GTUI_GridNavMenu span.menulinkdesctext > ul {
+            list-style-position: inside;
+            padding-left: 0;
+            text-align: left;
+        }
+
         footer {
             position: absolute;
             bottom: 0px;
             color: #FFFFFF;
         }
+
+        /* Bootstrap reconfiguration */
+        .btn-primary, .btn-primary:visited {
+            background-color: #A4925A !important;
+            border: none !important;
+        }
+
+        .btn-primary:hover, .btn-primary:active {
+            background-color: #857437 !important;
+            border: none !important;
+        }
 	</style>
 </head>
   <body>
 	  <header>
-			<div class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm"> <!-- shadow-sm -->
+			<div class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm" style="background-color: rgb(38, 38, 38) !important;"> <!-- shadow-sm -->
 				<div class="container">
 					<a href="/bprod/twbkwbis.P_GenMenu?name=bmenu.P_MainMnu" class="navbar-brand">
 						<img height="50" id="GTUI_gtLogo" alt="GT's Logo" />
@@ -60,7 +80,6 @@
                         <span class="align-middle" style="font-family: 'Abel', sans-serif;">
 							<span> </span>OSCAR
 						</span>
-                        
 					</a>
 					<div class="collapse navbar-collapse" id="GTUI_navbar_menu">
 						<ul class="navbar-nav">
@@ -96,7 +115,7 @@
 			</div>
 		</main>
 
-        <footer class="navbar-dark bg-dark container-fluid">
+        <footer class="navbar-dark bg-dark container-fluid" style="background-color: rgb(38, 38, 38) !important;">
             <div class="container">
                 <div class="row">
                     <div class="col-4 d-flex">
