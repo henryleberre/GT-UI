@@ -1,32 +1,46 @@
-window.addEventListener("load", async (event) => {    
-    // Get Template Page
-    let browserHandle = (typeof browser != 'undefined') ? browser : chrome;
+function GetBrowserHandle() {
+    return (typeof browser != 'undefined') ? browser : chrome;
+}
 
-    const templateSRC = await (await (await fetch(browserHandle.runtime.getURL("page_template.html"))).text());
+function GetExtensionURL(path) {
+    return GetBrowserHandle().runtime.getURL(path);
+}
 
-    // Copy the page's content into the template and make it the current DOM
-    let bodySRC = document.getElementsByClassName("pagebodydiv")[0].innerHTML;
-    document.getElementsByTagName("html")[0].innerHTML = templateSRC;
-    document.getElementById("GTUI_pageContent").innerHTML = bodySRC;
+function InsertTemplate() {
+    return fetch(GetExtensionURL("page_template.html")).then(async (fetched) => {
+        return fetched.text()
+    }).then(async (templateSource) => {
+        let pageBodyDivs = Array.from(document.getElementsByClassName("pagebodydiv"));
+        if (pageBodyDivs.length != 0) {            
+            let pageTitle = document.title;
 
-    // Insert Logos
-    document.getElementById("GTUI_gtLogo").src = browserHandle.runtime.getURL("gt-logo.svg");
+            document.getElementsByTagName("html")[0].innerHTML    = templateSource;
+            document.getElementById("GTUI_pageContent").innerHTML = pageBodyDivs[0].innerHTML;
+            document.title = pageTitle + " (GT-UI)";
+        }
+    });
+}
+
+function InsertLogoSRCs() {
+    let browserHandle = GetBrowserHandle();
+
+    document.getElementById("GTUI_gtLogo").src     = browserHandle.runtime.getURL("gt-logo.svg");
     document.getElementById("GTUI_githubLogo").src = browserHandle.runtime.getURL("github-logo.svg");
+}
 
-    // Top Menu: Show active page/menu item
-    let topMenuLinks = document.getElementById("GTUI_navbar_menu").getElementsByTagName("a");
-    let topMenuGetParams = ["P_GenMnu", "P_MainCSMnu", "P_StuMainMnu", "P_AdmMnu"];
+function TopNavMenuShowActiveTab() {
+    let domLinks = document.getElementById("GTUI_navbar_menu").getElementsByTagName("a");
+    let menuIds  = ["P_GenMnu", "P_MainCSMnu", "P_StuMainMnu", "P_AdmMnu"];
 
-    let paramIdx = 0;
-    for (let param of topMenuGetParams) {
-        if (window.location.href.endsWith(param)) {
-            topMenuLinks[paramIdx].style.color = "#f2c83f";
+    for (let i = 0; i < menuIds.length; ++i) {
+        if (window.location.href.endsWith(menuIds[i])) {
+            domLinks[i].style.color = "#f2c83f";
             break;
         }
-        paramIdx++;
     }
+}
 
-    // Make Prettier Menus
+function GenerateGridMenu() {
     let mpts = document.getElementsByClassName("menuplaintable");
     if (mpts.length > 0) {
         let menuData = [];
@@ -100,4 +114,14 @@ window.addEventListener("load", async (event) => {
         document.getElementById("GTUI_pageContent").innerHTML = "";
         document.getElementById("GTUI_pageContent").appendChild(menuDiv);
     }
-});
+}
+
+async function GTUI_Start(event) {
+    InsertTemplate().then(() => {
+        InsertLogoSRCs();
+        TopNavMenuShowActiveTab();
+        GenerateGridMenu();
+    });
+}
+
+window.addEventListener("load", GTUI_Start);
