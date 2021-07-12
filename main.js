@@ -92,8 +92,14 @@ function GenerateGridMenu() {
                     }
 
                     for (let link of Array.from(col.getElementsByTagName("a"))) {
-                        if (link.innerText == "") {
-                            link.remove();
+                        if (!window.location.href.endsWith("bmenu.P_MainMnu")) {
+                            if (link.innerText == "") {
+                                link.remove();
+                            }
+                        } else {
+                            const bmenuP_MainMnuItemNames = ["Student Services & Financial Aid", "Personal Information", "Campus Services", "Admission", "Take A Survey"];
+
+                            link.innerHTML = bmenuP_MainMnuItemNames[rowIdx * colCount + colIdx];
                         }
                     }
 
