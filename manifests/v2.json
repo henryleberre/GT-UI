@@ -24,6 +24,7 @@
     ],
     
     "web_accessible_resources": [
+        "src/content/gtui.css",
         "src/content/gtui.html",
         "src/content/gt-logo.svg",
         "src/content/github-logo.svg"
