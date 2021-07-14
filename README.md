@@ -17,7 +17,7 @@
   </a>
 </p>
 
-GT-UI is available for most modern browsers that are forks of either Chromium or Firefox. Support for others like Safari is not yet established.
+GT-UI is available for most modern browsers that are forks of either Chromium or Firefox. Support for others like Safari has not yet been established.
 
 ## Our mission
 
