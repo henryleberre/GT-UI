@@ -7,7 +7,7 @@ function GetExtensionURL(path) {
 }
 
 function InsertTemplate() {
-    return fetch(GetExtensionURL("src/gtui.html")).then(async (fetched) => {
+    return fetch(GetExtensionURL("src/content/gtui.html")).then(async (fetched) => {
         return fetched.text()
     }).then(async (templateSource) => {
         let pageBodyDivs = Array.from(document.getElementsByClassName("pagebodydiv"));
@@ -24,8 +24,8 @@ function InsertTemplate() {
 function InsertLogoSRCs() {
     let browserHandle = GetBrowserHandle();
 
-    document.getElementById("GTUI_gtLogo").src     = GetExtensionURL("src/gt-logo.svg");
-    document.getElementById("GTUI_githubLogo").src = GetExtensionURL("src/github-logo.svg");
+    document.getElementById("GTUI_gtLogo").src     = GetExtensionURL("src/content/gt-logo.svg");
+    document.getElementById("GTUI_githubLogo").src = GetExtensionURL("src/content/github-logo.svg");
 }
 
 function TopNavMenuShowActiveTab() {
