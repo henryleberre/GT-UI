@@ -14,8 +14,11 @@
     <img src="https://github.com/alrra/browser-logos/blob/main/src/opera/opera_64x64.png?raw=true">
     <img src="https://github.com/alrra/browser-logos/blob/main/src/vivaldi/vivaldi_64x64.png?raw=true">
   </a>
+  <a rel="noreferrer noopener" href="https://addons.mozilla.org/en-US/firefox/addon/gt-ui/">
+    <img src="https://github.com/alrra/browser-logos/blob/main/src/firefox/firefox_64x64.png?raw=true">
+    <img src="https://github.com/alrra/browser-logos/blob/main/src/tor/tor_64x64.png?raw=true">
+  </a>
 </p>
-<p>Firefox and derivatives support is upcoming.</p>
 
 ## GT 1000 IN5
 
