@@ -136,4 +136,8 @@ async function GTUI_Start(event) {
     });
 }
 
-window.addEventListener("load", GTUI_Start);
+if (document.readyState != "complete") {
+    window.addEventListener("load", GTUI_Start);
+} else {
+    GTUI_Start();
+}
