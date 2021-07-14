@@ -18,7 +18,7 @@
                 "https://oscar.gatech.edu/*"
             ],
             "js": [
-                "src/main.js"
+                "src/content/main.js"
             ]
         }
     ],
@@ -26,13 +26,25 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "src/gtui.html",
-                "src/gt-logo.svg",
-                "src/github-logo.svg"
+                "src/content/gtui.html",
+                "src/content/gt-logo.svg",
+                "src/content/github-logo.svg"
             ],
             "matches": [
                 "https://oscar.gatech.edu/*"
             ]
         }
-    ]
+    ],
+
+    "action": {
+        "default_icon": {
+            "128": "gtui_icons/icon128x128.png",
+            "64":  "gtui_icons/icon64x64.png",
+            "48":  "gtui_icons/icon48x48.png",
+            "32":  "gtui_icons/icon32x32.png",
+            "16":  "gtui_icons/icon16x16.png"
+        },
+        "default_title": "GT UI",
+        "default_popup": "src/popup/index.html"
+    }
 }
