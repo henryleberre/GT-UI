@@ -1,4 +1,4 @@
-all: chromium firefox
+all: clean chromium firefox
 
 clean:
 	rm -rf ./_build/
