@@ -5,11 +5,11 @@
     "version": "1.0",
 
     "icons": {
-		"128": "icons/Icon-128.png",
-		"64":  "icons/Icon-64.png",
-		"48":  "icons/Icon-48.png",
-		"32":  "icons/Icon-32.png",
-		"16":  "icons/Icon-16.png"
+		"128": "gtui_icons/icon128x128.png",
+		"64":  "gtui_icons/icon64x64.png",
+		"48":  "gtui_icons/icon48x48.png",
+		"32":  "gtui_icons/icon32x32.png",
+		"16":  "gtui_icons/icon16x16.png"
 	},
 
     "content_scripts": [
@@ -18,7 +18,7 @@
                 "https://oscar.gatech.edu/*"
             ],
             "js": [
-                "main.js"
+                "src/main.js"
             ]
         }
     ],
@@ -26,9 +26,9 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "page_template.html",
-                "gt-logo.svg",
-                "github-logo.svg"
+                "src/gtui.html",
+                "src/gt-logo.svg",
+                "src/github-logo.svg"
             ],
             "matches": [
                 "https://oscar.gatech.edu/*"
