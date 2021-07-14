@@ -18,6 +18,12 @@ function InsertTemplate() {
             document.getElementById("GTUI_pageContent").innerHTML = pageBodyDivs[0].innerHTML;
             document.title = pageTitle + " (GT-UI)";
         }
+    }).then(async () => {
+        let lnk = document.createElement("link");
+        lnk.href = GetExtensionURL("src/content/gtui.css");
+        lnk.rel  = "stylesheet";
+
+        document.head.appendChild(lnk);
     });
 }
 
