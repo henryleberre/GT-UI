@@ -1,10 +1,7 @@
-# GT UI
+<h1 align="center">GT UI</h1>
 
-> Making Georgia Tech's class registration system as beautiful as its payment gateway.
+## Download links
 
-## Install it!
-
-<p align="ceneter">Please select your browser:</p>
 <p align="center">
   <a rel="noreferrer noopener" href="https://chrome.google.com/webstore/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh/">
     <img src="https://github.com/alrra/browser-logos/blob/main/src/chrome/chrome_64x64.png?raw=true">
@@ -20,14 +17,53 @@
   </a>
 </p>
 
-## GT 1000 IN5
+GT-UI is available for most modern browsers that are forks of either Chromium or Firefox. Support for others like Safari is not yet established.
 
-This projectly was originaly conveived as part of a group project for the GT 1000 IN5 class that strived to enhance the experience of every student, on and off campus.
+## Our mission
+
+This projectly was originaly conveived as part of a group project for our GT 1000 IN5 class that strived to enhance the experience of every student - on and off campus. We are rather notorious for our current motto:
+
+> Making Georgia Tech's class registration system as beautiful as its payment gateway.
+
+## Building
+
+Required packages:
++ Debian: `sudo apt install git make zip imagemagick`
++ Arch: `sudo pacman -S git make zip imagemagick` (not tested)
+
+The root Makefile is responsible for generating "builds" of the extension for each browser platform. Its default target generates for all platforms. It creates a directory `_build` where generates the sources files for each platform in `_build/src/<platform>`, and outputs the packed versions as `_build/<platform>.zip`.
 
 ## How it works
 
-This browser extension executes a content script on every page load that occurs on OSCAR, which once the page loading ends, extracts the page's information and content, before inserting it into our predesigned template for how OSCAR should look. Some extra Javascript & CSS is needed to change the appearance of the page's content (i.e: formating menus, ...).
+### Prettify
 
-## References
+Whenever a page is being loaded, and its URL matches `https://oscar.gatech.edu/*`, the content script `src/content/main.js` is executed by the browser. It then performs the following:
++ Waits for the page to finish loading to invoke `GTUI_Start()`
++ It fetches the template we created for OSCAR's new look
++ Inserts the current DOM from the original OSCAR into the said template
++ Replaces the DOM with our "filled" template
++ Loads some resources such as icons from our `web_accessible_resources`
++ If there is a menu, it creates a prettier one by extracting and reconstructing the original menu
+ 
+Some extra Javascript & CSS is needed to change the appearance of the page's content (i.e: formating menus, ...).
+
+### About manifests
+
+Chrome encourages the use of Manifest v3 whilst Firefox hasn't completed its implementation of the standard, only supporting v2 for now. Consequently, we are required to maintain two seperate versions of our `manifest.json`.
+
+### Makefile > Why?
+
+My deep C/C++ background is probably partly to blame, but it replaced my earlier shell scripts for each platform, making the building process cleaner, easier to understand, and to maintain. It defines different build targets:
++ All
++ Chromium
++ Firefox
++ Safari (Coming Soon!)
++ Clean
+
+### Makefile > Icon generation
+
+The main icon is `gtui_icon.png`, at the very root of the repository. The Makefile uses the `imagemagick` package to create a copy of it for every size of icon we need, for its current build target platform.
+
+## Notable references
 
 + [Georgia Tech's Official Colors](https://brand.gatech.edu/our-look/colors)
