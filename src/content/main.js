@@ -7,23 +7,62 @@ function GetExtensionURL(path) {
 }
 
 function InsertTemplate() {
-    return fetch(GetExtensionURL("src/content/gtui.html")).then(async (fetched) => {
-        return fetched.text()
-    }).then(async (templateSource) => {
-        let pageBodyDivs = Array.from(document.getElementsByClassName("pagebodydiv"));
-        if (pageBodyDivs.length != 0) {            
-            let pageTitle = document.title;
+    // Remove all stylesheets from OSCAR
 
-            document.getElementsByTagName("html")[0].innerHTML    = templateSource;
-            document.getElementById("GTUI_pageContent").innerHTML = pageBodyDivs[0].innerHTML;
-            document.title = pageTitle + " (GT-UI)";
+    for (let lnk of document.head.getElementsByTagName("link")) {
+        if (lnk.rel == "stylesheet") {
+            document.head.removeChild(lnk);
         }
-    }).then(async () => {
+    }
+
+    // Add stylesheets & JS
+    const stylesheets = [
+        "src/lib/bootstrap.min.css",
+        "src/content/gtui.css"
+    ];
+
+    for (let stylesheet of stylesheets) {
         let lnk = document.createElement("link");
-        lnk.href = GetExtensionURL("src/content/gtui.css");
+        lnk.href = GetExtensionURL(stylesheet);
         lnk.rel  = "stylesheet";
 
         document.head.appendChild(lnk);
+    }
+
+    const scripts = [
+        "src/lib/bootstrap.bundle.min.js"
+    ];
+
+    for (let script of scripts) {
+        let elem  = document.createElement("script");
+        elem.src  = GetExtensionURL(script);
+        elem.type = "text/javascript";
+        document.head.appendChild(elem);
+    }
+
+    return fetch(GetExtensionURL("src/content/gtui.html")).then(async (fetched) => {
+        return fetched.text();
+    }).then(async (templateSource) => {
+        return import(GetExtensionURL("src/lib/purify.min.js")).then(() => {
+            let pageBodyDivs = Array.from(document.getElementsByClassName("pagebodydiv"));
+            if (pageBodyDivs.length != 0) {         
+                let pageContentNodes = [];
+                for (let e of pageBodyDivs[0].childNodes) {
+                    pageContentNodes.push(e.cloneNode(true));
+                }
+                
+                let pageTitle = document.title;
+
+                document.body.innerHTML = DOMPurify.sanitize(templateSource);
+
+                let GTUI_pageContentElem = document.getElementById("GTUI_pageContent");
+                for (let e of pageContentNodes) {
+                    GTUI_pageContentElem.appendChild(e);
+                }
+
+                document.title = pageTitle + " (GT-UI)";
+            }
+        });
     });
 }
 
@@ -62,8 +101,7 @@ function GenerateGridMenu() {
         }
 
         let menuDiv = document.createElement("div");
-        menuDiv.className = "container-fluid";
-        menuDiv.className = "GTUI_GridNavMenu";
+        menuDiv.className = "GTUI_GridNavMenu container-fluid";
 
         let menuItemIdx = 0;
         let colCount    = 4;
@@ -75,37 +113,39 @@ function GenerateGridMenu() {
                 if (menuItemIdx < menuData.length) { // TODO: integrate this check into the loop
                     let col = document.createElement("div");
                     col.className = "col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3";
-                    col.innerHTML += menuData[menuItemIdx];
+                    col.innerHTML += DOMPurify.sanitize(menuData[menuItemIdx]);
 
                     let colDescDiv = col.getElementsByClassName("menulinkdesctext")[0];
 
                     // Transform the description into a <ul><li> list
                     if (colDescDiv != undefined) {
-                        let descHTML = colDescDiv.innerHTML;
-                        if (descHTML.includes(";")) {
-                            let newDescHTML = "<ul>";
+                        if (colDescDiv.innerHTML.includes(";")) {
+                            let ul = document.createElement("ul");
                             
-                            for (let item of descHTML.split(";")) {
-                                newDescHTML += "<li>" + item.trim() + "</li>";
+                            for (let item of colDescDiv.innerHTML.split(";")) {
+                                let li = document.createElement("li");
+                                li.innerText = item.trim();
+                                
+                                ul.appendChild(li);
                             }
 
-                            newDescHTML += "</ul>";
-
-                            descHTML = newDescHTML;
+                            colDescDiv.appendChild(ul);
                         }
-
-                        colDescDiv.innerHTML = descHTML;
                     }
 
                     for (let link of Array.from(col.getElementsByTagName("a"))) {
                         if (!window.location.href.endsWith("bmenu.P_MainMnu")) {
-                            if (link.innerText == "") {
+                            if (link.innerText.trim().length == 0) {
                                 link.remove();
                             }
                         } else {
-                            const bmenuP_MainMnuItemNames = ["Student Services & Financial Aid", "Personal Information", "Campus Services", "Admission", "Take A Survey"];
-
-                            link.innerHTML = bmenuP_MainMnuItemNames[rowIdx * colCount + colIdx];
+                            link.innerText = [
+                                "Student Services & Financial Aid",
+                                "Personal Information",
+                                "Campus Services",
+                                "Admission",
+                                "Take A Survey"
+                            ][rowIdx * colCount + colIdx];
                         }
                     }
 
@@ -123,7 +163,12 @@ function GenerateGridMenu() {
             menuDiv.appendChild(row);
         }
 
-        document.getElementById("GTUI_pageContent").innerHTML = "";
+        let GTUI_pageContentElem = document.getElementById("GTUI_pageContent");
+
+        while (GTUI_pageContentElem.hasChildNodes()) {
+            GTUI_pageContentElem.removeChild(GTUI_pageContentElem.firstChild);
+        }
+
         document.getElementById("GTUI_pageContent").appendChild(menuDiv);
     }
 }
