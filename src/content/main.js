@@ -53,6 +53,8 @@ function InsertTemplate() {
                 
                 let pageTitle = document.title;
 
+                // The use of DOMPurify isn't justified but it was requested by Firefox
+                // since I am loading my own (local) code.
                 document.body.innerHTML = DOMPurify.sanitize(templateSource);
 
                 let GTUI_pageContentElem = document.getElementById("GTUI_pageContent");
