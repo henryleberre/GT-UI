@@ -3,7 +3,7 @@
 ## Download links
 
 <p align="center">
-  <a rel="noreferrer noopener" href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
+  <a rel="noreferrer noopener" href="https://chrome.google.com/webstore/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh/">
     <img src="https://github.com/alrra/browser-logos/blob/main/src/chrome/chrome_64x64.png?raw=true">
     <img src="https://github.com/alrra/browser-logos/blob/main/src/brave/brave_64x64.png?raw=true">
     <img src="https://github.com/alrra/browser-logos/blob/main/src/chromium/chromium_64x64.png?raw=true">
@@ -17,7 +17,7 @@
   </a>
 </p>
 
-GT-UI is available for most modern browsers that are forks of either Chromium or Firefox. Support for others like Safari has not yet been established.
+GT-UI is available for most modern browsers that are forks of either Chromium or Firefox. Support for others like Safari is not yet established.
 
 ## Our mission
 
@@ -50,19 +50,6 @@ Some extra Javascript & CSS is needed to change the appearance of the page's con
 ### About manifests
 
 Chrome encourages the use of Manifest v3 whilst Firefox hasn't completed its implementation of the standard, only supporting v2 for now. Consequently, we are required to maintain two seperate versions of our `manifest.json`.
-
-### Makefile > Why?
-
-My deep C/C++ background is probably partly to blame, but it replaced my earlier shell scripts for each platform, making the building process cleaner, easier to understand, and to maintain. It defines different build targets:
-+ All
-+ Chromium
-+ Firefox
-+ Safari (Coming Soon!)
-+ Clean
-
-### Makefile > Icon generation
-
-The main icon is `gtui_icon.png`, at the very root of the repository. The Makefile uses the `imagemagick` package to create a copy of it for every size of icon we need, for its current build target platform.
 
 ## Notable references
 
