@@ -23,22 +23,6 @@ body {
     position: relative;
 }
 
-div.GTUI_GridNavMenu a {
-    text-align: center;
-    width: 100%;
-    display: block;
-
-    white-space: normal;
-
-    font-weight: bolder;
-
-    height: 105px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 div.GTUI_GridNavMenu span.menulinkdesctext {
     text-align: justify;
     display: block;
@@ -61,12 +45,14 @@ footer {
 /* Bootstrap reconfiguration */
 .btn-primary,
 .btn-primary:visited {
-    background-color: #A4925A !important;
+    color: white !important;
+    background-color: #857437 !important;
     border: none !important;
 }
 
 .btn-primary:hover,
 .btn-primary:active {
-    background-color: #857437 !important;
+    color: white !important;
+    background-color: #A4925A !important;
     border: none !important;
 }
