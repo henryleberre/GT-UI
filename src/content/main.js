@@ -69,8 +69,6 @@ function InsertTemplate() {
 }
 
 function InsertLogoSRCs() {
-    let browserHandle = GetBrowserHandle();
-
     document.getElementById("GTUI_gtLogo").src     = GetExtensionURL("src/content/gt-logo.svg");
     document.getElementById("GTUI_githubLogo").src = GetExtensionURL("src/content/github-logo.svg");
 }
@@ -90,14 +88,14 @@ function TopNavMenuShowActiveTab() {
 function GenerateGridMenu() {
     let mpts = document.getElementsByClassName("menuplaintable");
     if (mpts.length > 0) {
-        let menuData = [];
+        let menuTDs = [];
 
         for (td of mpts[0].getElementsByTagName("td")) {
             if (Array.from(td.getElementsByTagName("a")).length > 0) {
                 if (td.innerText != "") {
-                    let elemHTML = td.innerHTML.replace(/&nbsp;/g,'');
+                    td.innerHTML = td.innerHTML.replace(/&nbsp;/g,'');
 
-                    menuData.push(elemHTML);
+                    menuTDs.push(td);
                 }
             }
         }
@@ -105,73 +103,161 @@ function GenerateGridMenu() {
         let menuDiv = document.createElement("div");
         menuDiv.className = "GTUI_GridNavMenu container-fluid";
 
-        let menuItemIdx = 0;
-        let colCount    = 4;
-        for (let rowIdx = 0; rowIdx <= Math.floor(menuData.length / colCount); rowIdx++) {
-            let row = document.createElement("div");
-            row.className = "row";
+        let cardRowElem = document.createElement("div");
+        cardRowElem.className = "row row-cols-1 row-cols-md-3 g-4";
 
-            for (let colIdx = 0; colIdx < colCount; colIdx++) {
-                if (menuItemIdx < menuData.length) { // TODO: integrate this check into the loop
-                    let col = document.createElement("div");
-                    col.className = "col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3";
-                    col.innerHTML += DOMPurify.sanitize(menuData[menuItemIdx]);
+        menuDiv.appendChild(cardRowElem);
 
-                    let colDescDiv = col.getElementsByClassName("menulinkdesctext")[0];
+        for (let idx = 0; idx < menuTDs.length; idx++) {
+            let cardColElem = document.createElement("div");
+            cardColElem.className = "col";
 
-                    // Transform the description into a <ul><li> list
-                    if (colDescDiv != undefined) {
-                        if (colDescDiv.innerHTML.includes(";")) {
-                            let ul = document.createElement("ul");
-                            
-                            for (let item of colDescDiv.innerHTML.split(";")) {
-                                let li = document.createElement("li");
-                                li.innerText = item.trim();
-                                
-                                ul.appendChild(li);
-                            }
+            // Create DOM elements
+            let cardElem = document.createElement("div");
+            cardElem.className = "card h-100 border-dark";
 
-                            colDescDiv.appendChild(ul);
-                        }
-                    }
+            let cardHeaderElem = document.createElement("div");
+            cardHeaderElem.className = "card-header text-light";
+            cardHeaderElem.style.textAlign = "center";
+            cardHeaderElem.style.fontWeight = "bolder";
+            cardHeaderElem.style.backgroundColor = "#857437";
 
-                    for (let link of Array.from(col.getElementsByTagName("a"))) {
-                        if (!window.location.href.endsWith("bmenu.P_MainMnu")) {
-                            if (link.innerText.trim().length == 0) {
-                                link.remove();
-                            }
+            let cardBodyElem = document.createElement("div");
+            cardBodyElem.className = "card-body";
+
+            let cardBodyTextElem = document.createElement("p");
+            cardBodyTextElem.className = "card-text";
+
+            let cardLink = document.createElement("a");
+            cardLink.className = "btn btn-primary col-12";
+            cardLink.innerText = "Visit";
+
+            // Fill DOM elements
+            {
+                for (let link of Array.from(menuTDs[idx].getElementsByTagName("a"))) {
+                    if (!window.location.href.endsWith("bmenu.P_MainMnu")) {
+                        if (link.innerText.trim().length == 0) {
+                            link.remove();
                         } else {
-                            link.innerText = [
-                                "Student Services & Financial Aid",
-                                "Personal Information",
-                                "Campus Services",
-                                "Admission",
-                                "Take A Survey"
-                            ][rowIdx * colCount + colIdx];
+                            cardLink.innerText = link.innerText;
+                            break;
                         }
+                    } else {
+                        cardLink.innerText = [
+                            "Student Services & Financial Aid",
+                            "Personal Information",
+                            "Campus Services",
+                            "Admission",
+                            "Take A Survey"
+                        ][idx];
+                        break;
                     }
-
-                    let mainLink = col.getElementsByTagName("a")[0];
-                    
-                    if (mainLink != undefined) {
-                        mainLink.className = "btn btn-primary btn-block";
-                    }
-                    row.appendChild(col);
                 }
-
-                menuItemIdx++;
             }
 
-            menuDiv.appendChild(row);
+            for (let menuLinkDescText of menuTDs[idx].getElementsByClassName("menulinkdesctext")) {
+                cardBodyTextElem.appendChild(menuLinkDescText);
+            }
+
+            cardLink.href = menuTDs[idx].getElementsByTagName("a")[0].href;
+
+            // Add to DOM
+            cardBodyElem.appendChild(cardBodyTextElem);
+
+            cardHeaderElem.appendChild(cardLink);
+            cardElem.appendChild(cardHeaderElem);
+            cardElem.appendChild(cardBodyElem);
+
+            cardColElem.appendChild(cardElem);
+
+            cardRowElem.appendChild(cardColElem);
+            
+            //let colDescDiv = col.getElementsByClassName("menulinkdesctext")[0];
+//
+            //// Transform the description into a <ul><li> list
+            //if (colDescDiv != undefined) {
+            //    if (colDescDiv.innerHTML.includes(";")) {
+            //        let ul = document.createElement("ul");
+            //                
+            //        for (let item of colDescDiv.innerHTML.split(";")) {
+            //            let li = document.createElement("li");
+            //            li.innerText = item.trim();
+            //                    
+            //            ul.appendChild(li);
+            //        }
+//
+            //        colDescDiv.appendChild(ul);
+            //    }
+            //}
         }
 
         let GTUI_pageContentElem = document.getElementById("GTUI_pageContent");
 
-        while (GTUI_pageContentElem.hasChildNodes()) {
-            GTUI_pageContentElem.removeChild(GTUI_pageContentElem.firstChild);
-        }
+        GTUI_pageContentElem.removeChild(mpts[0]);
 
         document.getElementById("GTUI_pageContent").appendChild(menuDiv);
+    }
+}
+
+function GenerateAlerts() {
+    for (let e of document.getElementsByClassName("infotextdiv")) {
+        e.className += " alert alert-warning";
+        e.setAttribute("role", "alert");
+
+        for (let e2 of e.getElementsByTagName("a")) {
+            e2.className += " alert-link";
+        }
+    }
+}
+
+function RemoveBadHTML() {
+    for (let e of document.querySelectorAll("a.skiplinks")) {
+        if (e.innerText == "Skip to top of page") {
+            e.remove();
+        }
+    }
+}
+
+function PrettyTables() {
+    for (let table of document.getElementsByTagName("table")) {
+        table.className += " table";
+    }
+}
+
+function GetClassRowClassName(nRemaining, nWLRemaining) {
+    if (nRemaining > 0) {
+        return "table-success";
+    }
+
+    if (nWLRemaining > 0) {
+        return "table-warning";
+    }
+
+    return "table-danger";
+}
+
+function ShowOpenAndClosedClasses() {
+    for (let table of document.getElementsByTagName("table")) {
+        let rows = table.getElementsByTagName("tr");
+        if (Array.from(rows).length < 2) {
+            continue;
+        }
+
+        let nCols = Array.from(rows[1].getElementsByTagName("th")).length;
+
+        rows[0].classList.add("table-dark");
+        rows[1].classList.add("table-dark");
+
+        if (nCols == 20) { // Is the case in "Lookup for classes"
+            for (let row of Array.from(rows).slice(2)) {
+                const cols = Array.from(row.getElementsByTagName("td"));
+
+                const nRemaining   = parseInt(cols[13].innerText);
+                const nWLRemaining = parseInt(cols[16].innerText);
+                
+                row.classList.add(GetClassRowClassName(nRemaining, nWLRemaining));
+            }
+        }
     }
 }
 
@@ -180,6 +266,10 @@ async function GTUI_Start(event) {
         InsertLogoSRCs();
         TopNavMenuShowActiveTab();
         GenerateGridMenu();
+        GenerateAlerts();
+        RemoveBadHTML();
+        PrettyTables();
+        ShowOpenAndClosedClasses();
     });
 }
 
