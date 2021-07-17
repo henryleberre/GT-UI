@@ -101,20 +101,20 @@ function GenerateGridMenu() {
         }
 
         let menuDiv = document.createElement("div");
-        menuDiv.className = "GTUI_GridNavMenu container-fluid";
+        menuDiv.classList.add("GTUI_GridNavMenu", "container-fluid");
 
         let cardRowElem = document.createElement("div");
-        cardRowElem.className = "row row-cols-1 row-cols-md-3 g-4";
+        cardRowElem.classList.add("row", "row-cols-1", "row-cols-md-3", "g-4");
 
         menuDiv.appendChild(cardRowElem);
 
         for (let idx = 0; idx < menuTDs.length; idx++) {
             let cardColElem = document.createElement("div");
-            cardColElem.className = "col";
+            cardColElem.classList.add("col");
 
             // Create DOM elements
             let cardElem = document.createElement("div");
-            cardElem.className = "card h-100 border-dark";
+            cardElem.classList.add("card", "h-100", "border-dark");
 
             let cardHeaderElem = document.createElement("div");
             cardHeaderElem.className = "card-header text-light";
@@ -123,17 +123,17 @@ function GenerateGridMenu() {
             cardHeaderElem.style.backgroundColor = "#857437";
 
             let cardBodyElem = document.createElement("div");
-            cardBodyElem.className = "card-body";
+            cardBodyElem.classList.add("card-body");
 
             let cardBodyTextElem = document.createElement("p");
-            cardBodyTextElem.className = "card-text";
+            cardBodyTextElem.classList.add("card-text");
 
             let cardLink = document.createElement("a");
-            cardLink.className = "btn btn-primary col-12";
+            cardLink.classList.add("btn", "btn-primary", "col-12");
             cardLink.innerText = "Visit";
 
             // Fill DOM elements
-            {
+            { // Link
                 for (let link of Array.from(menuTDs[idx].getElementsByTagName("a"))) {
                     if (!window.location.href.endsWith("bmenu.P_MainMnu")) {
                         if (link.innerText.trim().length == 0) {
@@ -153,13 +153,37 @@ function GenerateGridMenu() {
                         break;
                     }
                 }
+    
+                cardLink.href = menuTDs[idx].getElementsByTagName("a")[0].href;
             }
 
-            for (let menuLinkDescText of menuTDs[idx].getElementsByClassName("menulinkdesctext")) {
-                cardBodyTextElem.appendChild(menuLinkDescText);
-            }
+            { // Description
+                // Get Card's Description
+                let descriptionTextRaw = "";
+                for (let menuLinkDescText of menuTDs[idx].getElementsByClassName("menulinkdesctext")) {
+                    descriptionTextRaw += menuLinkDescText.innerText;
+                }
 
-            cardLink.href = menuTDs[idx].getElementsByTagName("a")[0].href;
+                if (descriptionTextRaw.includes(';')) {
+                    // Turn lists (of ";" seperated values) into actual <ul><li> ones
+                    let list = document.createElement("ul");
+                    list.classList.add("list-group");
+                    list.classList.add("list-group-flush");
+
+                    for (let listElementText of descriptionTextRaw.split(';')) {
+                        let listElement = document.createElement("li");
+                        listElement.classList.add("list-group-item");
+                        listElement.innerText = listElementText;
+
+                        list.appendChild(listElement);
+                    }
+
+                    cardBodyTextElem.appendChild(list);
+                } else {
+                    // Otherwise, simply paste the description text
+                    cardBodyTextElem.innerText = descriptionTextRaw;
+                }
+            }
 
             // Add to DOM
             cardBodyElem.appendChild(cardBodyTextElem);
@@ -171,24 +195,6 @@ function GenerateGridMenu() {
             cardColElem.appendChild(cardElem);
 
             cardRowElem.appendChild(cardColElem);
-            
-            //let colDescDiv = col.getElementsByClassName("menulinkdesctext")[0];
-//
-            //// Transform the description into a <ul><li> list
-            //if (colDescDiv != undefined) {
-            //    if (colDescDiv.innerHTML.includes(";")) {
-            //        let ul = document.createElement("ul");
-            //                
-            //        for (let item of colDescDiv.innerHTML.split(";")) {
-            //            let li = document.createElement("li");
-            //            li.innerText = item.trim();
-            //                    
-            //            ul.appendChild(li);
-            //        }
-//
-            //        colDescDiv.appendChild(ul);
-            //    }
-            //}
         }
 
         let GTUI_pageContentElem = document.getElementById("GTUI_pageContent");
@@ -201,11 +207,11 @@ function GenerateGridMenu() {
 
 function GenerateAlerts() {
     for (let e of document.getElementsByClassName("infotextdiv")) {
-        e.className += " alert alert-warning";
+        e.classList.add("alert", "alert-warning");
         e.setAttribute("role", "alert");
 
         for (let e2 of e.getElementsByTagName("a")) {
-            e2.className += " alert-link";
+            e2.classList.add("alert-link");
         }
     }
 }
@@ -220,7 +226,13 @@ function RemoveBadHTML() {
 
 function PrettyTables() {
     for (let table of document.getElementsByTagName("table")) {
-        table.className += " table";
+        table.classList.add("table");
+
+        let rows = Array.from(table.getElementsByTagName("tr"));
+
+        if (rows.length >= 1 && window.location.href.endsWith("bprod/bwskfshd.P_CrseSchd")) { // If "Week at a glance"
+            rows[0].classList.add("table-dark");
+        }
     }
 }
 
@@ -238,8 +250,10 @@ function GetClassRowClassName(nRemaining, nWLRemaining) {
 
 function ShowOpenAndClosedClasses() {
     for (let table of document.getElementsByTagName("table")) {
-        let rows = table.getElementsByTagName("tr");
-        if (Array.from(rows).length < 2) {
+        let rows  = Array.from(table.getElementsByTagName("tr"));
+        let nRows = rows.length;
+
+        if (nRows < 2) {
             continue;
         }
 
@@ -249,7 +263,7 @@ function ShowOpenAndClosedClasses() {
         rows[1].classList.add("table-dark");
 
         if (nCols == 20) { // Is the case in "Lookup for classes"
-            for (let row of Array.from(rows).slice(2)) {
+            for (let row of rows.slice(2)) {
                 const cols = Array.from(row.getElementsByTagName("td"));
 
                 const nRemaining   = parseInt(cols[13].innerText);
