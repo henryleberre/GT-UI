@@ -55,9 +55,13 @@ function QuerySelectorAllForeach(parentElem, selector, callback) {
     return Array.from(parentElem.querySelectorAll(selector)).forEach(callback);
 }
 
-function CreateChildOfType(parent, childTagName) {
+function CreateChildOfType(parent, childTagName, id = "", className = "", style = "") {
     let e = document.createElement(childTagName);
     parent.appendChild(e);
+
+    e.id = id;
+    e.className = className;
+    e.setAttribute("style", style);
 
     return e;
 }
@@ -126,108 +130,64 @@ function GenerateGridMenu() {
             }
         });
 
-        let menuDiv = document.createElement("div");
-        menuDiv.classList.add("GTUI_GridNavMenu", "container-fluid");
+        let pageContentElem = document.getElementById("GTUI_pageContent");
 
-        let cardRowElem = document.createElement("div");
-        cardRowElem.classList.add("row", "row-cols-1", "row-cols-md-3", "g-4");
-
-        menuDiv.appendChild(cardRowElem);
+        let menuDiv     = CreateChildOfType(pageContentElem, "div", "", "GTUI_GridNavMenu container-fluid", "");
+        let cardRowElem = CreateChildOfType(menuDiv,         "div", "", "row row-cols-1 row-cols-md-3 g-4", "");
 
         for (let idx = 0; idx < menuTDs.length; idx++) {
-            let cardColElem = document.createElement("div");
-            cardColElem.classList.add("col");
-
-            // Create DOM elements
-            let cardElem = document.createElement("div");
-            cardElem.classList.add("card", "h-100", "border-dark");
-
-            let cardHeaderElem = document.createElement("div");
-            cardHeaderElem.className = "card-header text-light";
-            cardHeaderElem.style.textAlign = "center";
-            cardHeaderElem.style.fontWeight = "bolder";
-            cardHeaderElem.style.backgroundColor = "#857437";
-
-            let cardBodyElem = document.createElement("div");
-            cardBodyElem.classList.add("card-body");
-
-            let cardBodyTextElem = document.createElement("p");
-            cardBodyTextElem.classList.add("card-text");
-
-            let cardLink = document.createElement("a");
-            cardLink.classList.add("btn", "btn-primary", "col-12");
+            let cardColElem      = CreateChildOfType(cardRowElem,    "div", "", "col",                    "");
+            let cardElem         = CreateChildOfType(cardColElem,    "div", "", "card h-100 border-dark", "");
+            let cardHeaderElem   = CreateChildOfType(cardElem,       "div", "", "card-header text-light", "text-align: center; font-weight: bolder; background-color: #857437;");
+            let cardBodyElem     = CreateChildOfType(cardElem,       "div", "", "card-body",              "");
+            let cardBodyTextElem = CreateChildOfType(cardBodyElem,   "p",   "", "card-text",              "");
+            let cardLink         = CreateChildOfType(cardHeaderElem, "a",   "", "btn btn-primary col-12", "");
+            
             cardLink.innerText = "Visit";
+            cardLink.href      = menuTDs[idx].getElementsByTagName("a")[0].href;
 
-            // Fill DOM elements
-            { // Link
-                for (let link of Array.from(menuTDs[idx].getElementsByTagName("a"))) {
-                    if (!window.location.href.endsWith("bmenu.P_MainMnu")) {
-                        if (link.innerText.trim().length == 0) {
-                            link.remove();
-                        } else {
-                            cardLink.innerText = link.innerText;
-                            break;
-                        }
+            // Link
+            GetElementsByTagNameForeach(menuTDs[idx], "a", (linkElem) => {
+                if (!window.location.href.endsWith("bmenu.P_MainMnu")) {
+                    if (linkElem.innerText.trim().length == 0) {
+                        linkElem.remove();
                     } else {
-                        cardLink.innerText = [
-                            "Student Services & Financial Aid",
-                            "Personal Information",
-                            "Campus Services",
-                            "Admission",
-                            "Take A Survey"
-                        ][idx];
-                        break;
+                        cardLink.innerText = linkElem.innerText;
                     }
+                } else {
+                    cardLink.innerText = [
+                        "Student Services & Financial Aid",
+                        "Personal Information",
+                        "Campus Services",
+                        "Admission",
+                        "Take A Survey"
+                    ][idx];
                 }
-
-                cardLink.href = menuTDs[idx].getElementsByTagName("a")[0].href;
-            }
+            });
 
             { // Description
                 // Get Card's Description
                 let descriptionTextRaw = "";
-                for (let menuLinkDescText of menuTDs[idx].getElementsByClassName("menulinkdesctext")) {
+                GetElementsByClassNameForeach(menuTDs[idx], "menulinkdesctext", (menuLinkDescText) => {
                     descriptionTextRaw += menuLinkDescText.innerText;
-                }
+                });
 
                 if (descriptionTextRaw.includes(';')) {
                     // Turn lists (of ";" seperated values) into actual <ul><li> ones
-                    let list = document.createElement("ul");
-                    list.classList.add("list-group");
-                    list.classList.add("list-group-flush");
+                    let list = CreateChildOfType(cardBodyTextElem, "ul", "", "list-group list-group-flush", "");
 
                     for (let listElementText of descriptionTextRaw.split(';')) {
-                        let listElement = document.createElement("li");
-                        listElement.classList.add("list-group-item");
+                        let listElement = CreateChildOfType(list, "li", "", "list-group-item", "");
                         listElement.innerText = listElementText;
-
-                        list.appendChild(listElement);
                     }
-
-                    cardBodyTextElem.appendChild(list);
                 } else {
                     // Otherwise, simply paste the description text
                     cardBodyTextElem.innerText = descriptionTextRaw;
                 }
             }
-
-            // Add to DOM
-            cardBodyElem.appendChild(cardBodyTextElem);
-
-            cardHeaderElem.appendChild(cardLink);
-            cardElem.appendChild(cardHeaderElem);
-            cardElem.appendChild(cardBodyElem);
-
-            cardColElem.appendChild(cardElem);
-
-            cardRowElem.appendChild(cardColElem);
         }
 
-        let GTUI_pageContentElem = document.getElementById("GTUI_pageContent");
-
-        GTUI_pageContentElem.removeChild(mptElem);
-
-        document.getElementById("GTUI_pageContent").appendChild(menuDiv);
+        mptElem.remove();
     });
 }
 
@@ -236,7 +196,8 @@ function GenerateAlerts() {
         warningElem.classList.add("alert", "alert-warning");
         warningElem.setAttribute("role", "alert");
 
-        Array.from(warningElem.getElementsByTagName("a")).forEach((alertLink) => {
+
+        GetElementsByTagNameForeach(warningElem, "a", (alertLink) => {
             alertLink.classList.add("alert-link");
         });
     });
