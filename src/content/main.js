@@ -1,104 +1,130 @@
-function GetBrowserHandle() {
-    return (typeof browser != 'undefined') ? browser : chrome;
+let browserHandle   = (typeof browser != 'undefined') ? browser : chrome;
+let GetExtensionURL = browserHandle.runtime.getURL;
+
+const CSS_FILENAMES = [
+    "src/lib/bootstrap.min.css",
+    "src/content/gtui.css"
+];
+
+const JAVASCRIPT_FILENAMES = [
+    "src/lib/bootstrap.bundle.min.js"
+];
+
+function IncludeCSSFile(filename) {
+    let link  = document.createElement("link");
+    link.href = GetExtensionURL(filename);
+    link.rel  = "stylesheet";
+
+    document.head.appendChild(link);
 }
 
-function GetExtensionURL(path) {
-    return GetBrowserHandle().runtime.getURL(path);
+function IncludeJavascriptFile(filename) {
+    let script  = document.createElement("script");
+    script.src  = GetExtensionURL(filename);
+    script.type = "text/javascript";
+    document.head.appendChild(script);
 }
 
-function InsertTemplate() {
+async function LoadFileContents(filename) {
+    let fetched = await fetch(GetExtensionURL(filename));
+    let text    = await fetched.text();
+
+    return text;
+}
+
+function ImportJavascriptModule(filename) {
+    return import(GetExtensionURL(filename));
+}
+
+function GetElementByIdAndDo(id, callback) {
+    let e = document.getElementById(id);
+
+    if (e != undefined)
+        callback(e);
+}
+
+function GetElementsByClassNameForeach(parentElem, className, callback) {
+    return Array.from(parentElem.getElementsByClassName(className)).forEach(callback);
+}
+
+function GetElementsByTagNameForeach(parentElem, tagName, callback) {
+    return Array.from(parentElem.getElementsByTagName(tagName)).forEach(callback);
+}
+
+function QuerySelectorAllForeach(parentElem, selector, callback) {
+    return Array.from(parentElem.querySelectorAll(selector)).forEach(callback);
+}
+
+function CreateChildOfType(parent, childTagName) {
+    let e = document.createElement(childTagName);
+    parent.appendChild(e);
+
+    return e;
+}
+
+async function InsertTemplate() {
     // Remove all stylesheets from OSCAR
-
-    for (let lnk of document.head.getElementsByTagName("link")) {
-        if (lnk.rel == "stylesheet") {
-            document.head.removeChild(lnk);
-        }
-    }
+    QuerySelectorAllForeach(document.head, "link[rel='stylesheet']", (lnk) => {
+        lnk.remove();
+    });
 
     // Add stylesheets & JS
-    const stylesheets = [
-        "src/lib/bootstrap.min.css",
-        "src/content/gtui.css"
-    ];
+    CSS_FILENAMES.forEach(IncludeCSSFile);
+    JAVASCRIPT_FILENAMES.forEach(IncludeJavascriptFile);
 
-    for (let stylesheet of stylesheets) {
-        let lnk = document.createElement("link");
-        lnk.href = GetExtensionURL(stylesheet);
-        lnk.rel  = "stylesheet";
+    // Extract Body Elements From OSCAR's Loaded Page
+    let bodyNodes = [];
+    GetElementsByClassNameForeach(document, "pagebodydiv", (bodyDiv) => {
+        bodyDiv.childNodes.forEach((e) => {
+            bodyNodes.push(e.cloneNode(true));
+        });
+    });
 
-        document.head.appendChild(lnk);
-    }
+    // Load Template (DOMPurify.sanitize required by Firefox for no reason)
+    await ImportJavascriptModule("src/lib/purify.min.js");
 
-    const scripts = [
-        "src/lib/bootstrap.bundle.min.js"
-    ];
+    document.body.innerHTML = DOMPurify.sanitize(await LoadFileContents("src/content/gtui.html"));    
 
-    for (let script of scripts) {
-        let elem  = document.createElement("script");
-        elem.src  = GetExtensionURL(script);
-        elem.type = "text/javascript";
-        document.head.appendChild(elem);
-    }
-
-    return fetch(GetExtensionURL("src/content/gtui.html")).then(async (fetched) => {
-        return fetched.text();
-    }).then(async (templateSource) => {
-        return import(GetExtensionURL("src/lib/purify.min.js")).then(() => {
-            let pageBodyDivs = Array.from(document.getElementsByClassName("pagebodydiv"));
-            if (pageBodyDivs.length != 0) {         
-                let pageContentNodes = [];
-                for (let e of pageBodyDivs[0].childNodes) {
-                    pageContentNodes.push(e.cloneNode(true));
-                }
-                
-                let pageTitle = document.title;
-
-                // The use of DOMPurify isn't justified but it was requested by Firefox
-                // since I am loading my own (local) code.
-                document.body.innerHTML = DOMPurify.sanitize(templateSource);
-
-                let GTUI_pageContentElem = document.getElementById("GTUI_pageContent");
-                for (let e of pageContentNodes) {
-                    GTUI_pageContentElem.appendChild(e);
-                }
-
-                document.title = pageTitle + " (GT-UI)";
-            }
+    // Insert OSCAR's Body Elements Into The Template
+    bodyNodes.forEach((e) => {
+        GetElementByIdAndDo("GTUI_pageContent", (pageContentElem) => {
+            pageContentElem.appendChild(e);
         });
     });
 }
 
 function InsertLogoSRCs() {
-    document.getElementById("GTUI_gtLogo").src     = GetExtensionURL("src/content/gt-logo.svg");
-    document.getElementById("GTUI_githubLogo").src = GetExtensionURL("src/content/github-logo.svg");
+    GetElementByIdAndDo("GTUI_gtLogo", (e) => {
+        e.src = GetExtensionURL("src/content/gt-logo.svg");
+    });
+
+    GetElementByIdAndDo("GTUI_githubLogo", (e) => {
+        e.src = GetExtensionURL("src/content/github-logo.svg");
+    });
 }
 
 function TopNavMenuShowActiveTab() {
-    let domLinks = document.getElementById("GTUI_navbar_menu").getElementsByTagName("a");
-    let menuIds  = ["P_GenMnu", "P_MainCSMnu", "P_StuMainMnu", "P_AdmMnu"];
+    let currentMenuLink = Array.from(document.querySelectorAll("#GTUI_navbar_menu a")).find((val) => {
+        return val == window.location.href
+    });
 
-    for (let i = 0; i < menuIds.length; ++i) {
-        if (window.location.href.endsWith(menuIds[i])) {
-            domLinks[i].style.color = "#f2c83f";
-            break;
-        }
-    }
+    if (currentMenuLink != undefined)
+        currentMenuLink.style.color = "#f2c83f";
 }
 
 function GenerateGridMenu() {
-    let mpts = document.getElementsByClassName("menuplaintable");
-    if (mpts.length > 0) {
+    GetElementsByClassNameForeach(document, "menuplaintable", (mptElem) => {
         let menuTDs = [];
 
-        for (td of mpts[0].getElementsByTagName("td")) {
-            if (Array.from(td.getElementsByTagName("a")).length > 0) {
-                if (td.innerText != "") {
-                    td.innerHTML = td.innerHTML.replace(/&nbsp;/g,'');
+        GetElementsByTagNameForeach(mptElem, "td", (tdElem) => {
+            if (Array.from(tdElem.getElementsByTagName("a")).length > 0) {
+                if (tdElem.innerText != "") {
+                    tdElem.innerHTML = tdElem.innerHTML.replace(/&nbsp;/g, '');
 
-                    menuTDs.push(td);
+                    menuTDs.push(tdElem);
                 }
             }
-        }
+        });
 
         let menuDiv = document.createElement("div");
         menuDiv.classList.add("GTUI_GridNavMenu", "container-fluid");
@@ -153,7 +179,7 @@ function GenerateGridMenu() {
                         break;
                     }
                 }
-    
+
                 cardLink.href = menuTDs[idx].getElementsByTagName("a")[0].href;
             }
 
@@ -199,41 +225,51 @@ function GenerateGridMenu() {
 
         let GTUI_pageContentElem = document.getElementById("GTUI_pageContent");
 
-        GTUI_pageContentElem.removeChild(mpts[0]);
+        GTUI_pageContentElem.removeChild(mptElem);
 
         document.getElementById("GTUI_pageContent").appendChild(menuDiv);
-    }
+    });
 }
 
 function GenerateAlerts() {
-    for (let e of document.getElementsByClassName("infotextdiv")) {
-        e.classList.add("alert", "alert-warning");
-        e.setAttribute("role", "alert");
+    GetElementsByClassNameForeach(document, "infotextdiv", (warningElem) => {
+        warningElem.classList.add("alert", "alert-warning");
+        warningElem.setAttribute("role", "alert");
 
-        for (let e2 of e.getElementsByTagName("a")) {
-            e2.classList.add("alert-link");
-        }
-    }
+        Array.from(warningElem.getElementsByTagName("a")).forEach((alertLink) => {
+            alertLink.classList.add("alert-link");
+        });
+    });
 }
 
 function RemoveBadHTML() {
-    for (let e of document.querySelectorAll("a.skiplinks")) {
-        if (e.innerText == "Skip to top of page") {
-            e.remove();
-        }
-    }
+    // Remove SkipLinks
+    QuerySelectorAllForeach(document, "a.skiplinks", (skipLink) => {
+        if (skipLink.innerText == "Skip to top of page")
+            skipLink.remove();
+    });
+}
+
+function ShouldMakeTableHeaderDark(tableElem, nRows) {
+    if (nRows == 0)
+        return false;
+
+    if (window.location.href.endsWith("bprod/bwskfshd.P_CrseSchd"))
+        return true;
+
+    return false;
 }
 
 function PrettyTables() {
-    for (let table of document.getElementsByTagName("table")) {
-        table.classList.add("table");
+    GetElementsByTagNameForeach(document, "table", (tableElem) => {
+        tableElem.classList.add("table");
 
-        let rows = Array.from(table.getElementsByTagName("tr"));
+        let rows = Array.from(tableElem.getElementsByTagName("tr"));
 
-        if (rows.length >= 1 && window.location.href.endsWith("bprod/bwskfshd.P_CrseSchd")) { // If "Week at a glance"
+        if (ShouldMakeTableHeaderDark(tableElem, rows.length)) { // If "Week at a glance"
             rows[0].classList.add("table-dark");
         }
-    }
+    });
 }
 
 function GetClassRowClassName(nRemaining, nWLRemaining) {
@@ -249,42 +285,40 @@ function GetClassRowClassName(nRemaining, nWLRemaining) {
 }
 
 function ShowOpenAndClosedClasses() {
-    for (let table of document.getElementsByTagName("table")) {
-        let rows  = Array.from(table.getElementsByTagName("tr"));
+    GetElementsByTagNameForeach(document, "table", (tableElem) => {
+        let rows  = Array.from(tableElem.getElementsByTagName("tr"));
         let nRows = rows.length;
 
-        if (nRows < 2) {
-            continue;
-        }
+        if (nRows >= 2) {
+            let nCols = Array.from(rows[1].getElementsByTagName("th")).length;
 
-        let nCols = Array.from(rows[1].getElementsByTagName("th")).length;
+            rows[0].classList.add("table-dark");
+            rows[1].classList.add("table-dark");
 
-        rows[0].classList.add("table-dark");
-        rows[1].classList.add("table-dark");
+            if (nCols == 20) { // Is the case in "Lookup for classes"
+                for (let row of rows.slice(2)) {
+                    const cols = Array.from(row.getElementsByTagName("td"));
 
-        if (nCols == 20) { // Is the case in "Lookup for classes"
-            for (let row of rows.slice(2)) {
-                const cols = Array.from(row.getElementsByTagName("td"));
+                    const nRemaining = parseInt(cols[13].innerText);
+                    const nWLRemaining = parseInt(cols[16].innerText);
 
-                const nRemaining   = parseInt(cols[13].innerText);
-                const nWLRemaining = parseInt(cols[16].innerText);
-                
-                row.classList.add(GetClassRowClassName(nRemaining, nWLRemaining));
+                    row.classList.add(GetClassRowClassName(nRemaining, nWLRemaining));
+                }
             }
         }
-    }
+    });
 }
 
 async function GTUI_Start(event) {
-    InsertTemplate().then(() => {
-        InsertLogoSRCs();
-        TopNavMenuShowActiveTab();
-        GenerateGridMenu();
-        GenerateAlerts();
-        RemoveBadHTML();
-        PrettyTables();
-        ShowOpenAndClosedClasses();
-    });
+    await InsertTemplate();
+
+    InsertLogoSRCs();
+    TopNavMenuShowActiveTab();
+    GenerateGridMenu();
+    GenerateAlerts();
+    RemoveBadHTML();
+    PrettyTables();
+    ShowOpenAndClosedClasses();
 }
 
 if (document.readyState != "complete") {
