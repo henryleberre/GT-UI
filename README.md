@@ -21,6 +21,8 @@ GT-UI is available for most modern browsers that are forks of either Chromium or
 
 ## Our mission
 
+![Presentation Image](screenshots/presentation.png)
+
 This projectly was originaly conveived as part of a group project for our GT 1000 IN5 class that strived to enhance the experience of every student - on and off campus. We are rather notorious for our current motto:
 
 > Making Georgia Tech's class registration system as beautiful as its payment gateway.
