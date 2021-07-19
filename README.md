@@ -3,7 +3,7 @@
 ## Download links
 
 <p align="center">
-  <a rel="noreferrer noopener" href="https://chrome.google.com/webstore/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh/">
+  <a rel="noreferrer noopener" href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee/overview?hl=en">
     <img src="https://github.com/alrra/browser-logos/blob/main/src/chrome/chrome_64x64.png?raw=true">
     <img src="https://github.com/alrra/browser-logos/blob/main/src/brave/brave_64x64.png?raw=true">
     <img src="https://github.com/alrra/browser-logos/blob/main/src/chromium/chromium_64x64.png?raw=true">
