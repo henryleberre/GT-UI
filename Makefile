@@ -26,6 +26,6 @@ firefox:
 
 firefox_sign: firefox
 	mkdir -p ./_build/dist/firefox
-	cd _build/src/firefox && web-ext sign --api-key=$$(cat ../../../keys/firefox_api_key.txt) --api-secret=$$(cat ../../../keys/firefox_api_secret.txt) --channel=unlisted
+	cd _build/src/firefox && web-ext sign --api-key=$$(cat ../../../keys/firefox_api_key.txt) --api-secret=$$(cat ../../../keys/firefox_api_secret.txt) --channel=unlisted --id="{5c7a5cfb-c809-4f1d-9e7a-3eeebf72e191}"
 	cp -a _build/src/firefox/web-ext-artifacts _build/dist/firefox/
 	cp _build/src/firefox/.web-extension-id _build/dist/firefox/
