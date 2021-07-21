@@ -30,8 +30,9 @@ This projectly was originaly conveived as part of a group project for our GT 100
 ## Building
 
 Required packages:
-+ Debian: `sudo apt install git make zip imagemagick`
-+ Arch: `sudo pacman -S git make zip imagemagick` (not tested)
++ Debian: `sudo apt install git make zip imagemagick npm`
++ Arch: `sudo pacman -S git make zip imagemagick npm` (not tested)
++ All: `npm install --global web-ext`
 
 The root Makefile is responsible for generating "builds" of the extension for each browser platform. Its default target generates for all platforms. It creates a directory `_build` where generates the sources files for each platform in `_build/src/<platform>`, and outputs the packed versions as `_build/<platform>.zip`.
 
