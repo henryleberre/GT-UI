@@ -26,12 +26,7 @@
                 "src/content/gtui.html",
                 "src/content/gt-logo.svg",
                 "src/content/github-logo.svg",
-                "src/lib/bootstrap.min.css",
-                "src/lib/bootstrap.min.css.map",
-                "src/lib/bootstrap.bundle.min.js",
-                "src/lib/bootstrap.bundle.min.js.map",
-                "src/lib/purify.min.js",
-                "src/lib/purify.min.js.map"
+                "src/lib/tailwind.min.css"
             ],
             "matches": [
                 "https://oscar.gatech.edu/*"

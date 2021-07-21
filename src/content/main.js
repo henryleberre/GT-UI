@@ -2,12 +2,11 @@ let browserHandle   = (typeof browser != 'undefined') ? browser : chrome;
 let GetExtensionURL = browserHandle.runtime.getURL;
 
 const CSS_FILENAMES = [
-    "src/lib/bootstrap.min.css",
-    "src/content/gtui.css"
+    "src/lib/tailwind.min.css",
 ];
 
 const JAVASCRIPT_FILENAMES = [
-    "src/lib/bootstrap.bundle.min.js"
+
 ];
 
 function IncludeCSSFile(filename) {
@@ -84,10 +83,8 @@ async function InsertTemplate() {
         });
     });
 
-    // Load Template (DOMPurify.sanitize required by Firefox for no reason)
-    await ImportJavascriptModule("src/lib/purify.min.js");
-
-    document.body.innerHTML = DOMPurify.sanitize(await LoadFileContents("src/content/gtui.html"));    
+    // Load Template
+    document.body.innerHTML = await LoadFileContents("src/content/gtui.html");    
 
     // Insert OSCAR's Body Elements Into The Template
     bodyNodes.forEach((e) => {
@@ -109,11 +106,15 @@ function InsertLogoSRCs() {
 
 function TopNavMenuShowActiveTab() {
     let currentMenuLink = Array.from(document.querySelectorAll("#GTUI_navbar_menu a")).find((val) => {
-        return val == window.location.href
+        return window.location.href.includes(val);
     });
 
-    if (currentMenuLink != undefined)
-        currentMenuLink.style.color = "#f2c83f";
+    if (currentMenuLink != undefined) {
+        GetElementsByTagNameForeach(currentMenuLink, "svg", (svgElem) => {
+            svgElem.style.color = "#f2c83f";
+        });
+    }
+        
 }
 
 function GenerateGridMenu() {
@@ -132,16 +133,15 @@ function GenerateGridMenu() {
 
         let pageContentElem = document.getElementById("GTUI_pageContent");
 
-        let menuDiv     = CreateChildOfType(pageContentElem, "div", "", "GTUI_GridNavMenu container-fluid", "");
-        let cardRowElem = CreateChildOfType(menuDiv,         "div", "", "row row-cols-1 row-cols-md-3 g-4", "");
+        let menuDiv = CreateChildOfType(pageContentElem, "div", "", "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4", "");
 
         for (let idx = 0; idx < menuTDs.length; idx++) {
-            let cardColElem      = CreateChildOfType(cardRowElem,    "div", "", "col",                    "");
-            let cardElem         = CreateChildOfType(cardColElem,    "div", "", "card h-100 border-dark", "");
-            let cardHeaderElem   = CreateChildOfType(cardElem,       "div", "", "card-header text-light", "text-align: center; font-weight: bolder; background-color: #857437;");
-            let cardBodyElem     = CreateChildOfType(cardElem,       "div", "", "card-body",              "");
-            let cardBodyTextElem = CreateChildOfType(cardBodyElem,   "p",   "", "card-text",              "");
-            let cardLink         = CreateChildOfType(cardHeaderElem, "a",   "", "btn btn-primary col-12", "");
+            let cardColElem      = CreateChildOfType(menuDiv,        "div", "", "rounded-xl shadow-2xl", "");
+            let cardElem         = CreateChildOfType(cardColElem,    "div", "", "",    "");
+            let cardHeaderElem   = CreateChildOfType(cardElem,       "div", "", "",    "");
+            let cardBodyElem     = CreateChildOfType(cardElem,       "div", "", "p-4 text-xl", "");
+            let cardBodyTextElem = CreateChildOfType(cardBodyElem,   "p",   "", "",    "");
+            let cardLink         = CreateChildOfType(cardHeaderElem, "a",   "", "text-center w-full p-4 rounded-md bg-black text-white text-2xl", "display: inline-block;");
             
             cardLink.innerText = "Visit";
             cardLink.href      = menuTDs[idx].getElementsByTagName("a")[0].href;
@@ -174,10 +174,10 @@ function GenerateGridMenu() {
 
                 if (descriptionTextRaw.includes(';')) {
                     // Turn lists (of ";" seperated values) into actual <ul><li> ones
-                    let list = CreateChildOfType(cardBodyTextElem, "ul", "", "list-group list-group-flush", "");
+                    let list = CreateChildOfType(cardBodyTextElem, "ul", "", "", "");
 
                     for (let listElementText of descriptionTextRaw.split(';')) {
-                        let listElement = CreateChildOfType(list, "li", "", "list-group-item", "");
+                        let listElement = CreateChildOfType(list, "li", "", "border-black list-none rounded-sm px-3 py-3", "");
                         listElement.innerText = listElementText;
                     }
                 } else {
@@ -193,13 +193,7 @@ function GenerateGridMenu() {
 
 function GenerateAlerts() {
     GetElementsByClassNameForeach(document, "infotextdiv", (warningElem) => {
-        warningElem.classList.add("alert", "alert-warning");
-        warningElem.setAttribute("role", "alert");
-
-
-        GetElementsByTagNameForeach(warningElem, "a", (alertLink) => {
-            alertLink.classList.add("alert-link");
-        });
+        warningElem.classList.add("bg-yellow-400", "p-5", "rounded-md");
     });
 }
 
@@ -223,7 +217,7 @@ function ShouldMakeTableHeaderDark(tableElem, nRows) {
 
 function PrettyTables() {
     GetElementsByTagNameForeach(document, "table", (tableElem) => {
-        tableElem.classList.add("table");
+        tableElem.classList.add("mx-auto");
 
         let rows = Array.from(tableElem.getElementsByTagName("tr"));
 
@@ -233,16 +227,16 @@ function PrettyTables() {
     });
 }
 
-function GetClassRowClassName(nRemaining, nWLRemaining) {
+function GetClassTableItemClassName(nRemaining, nWLRemaining) {
     if (nRemaining > 0) {
-        return "table-success";
+        return "bg-green-500";
     }
 
     if (nWLRemaining > 0) {
-        return "table-warning";
+        return "bg-yellow-500";
     }
 
-    return "table-danger";
+    return "bg-red-500";
 }
 
 function ShowOpenAndClosedClasses() {
@@ -250,11 +244,16 @@ function ShowOpenAndClosedClasses() {
         let rows  = Array.from(tableElem.getElementsByTagName("tr"));
         let nRows = rows.length;
 
+        GetElementsByTagNameForeach(document, "th", (tdElem) => {
+            tdElem.classList.add("py-4", "font-semibold", "text-white", "bg-black", "text-center");
+        });
+
+        GetElementsByTagNameForeach(document, "td", (tdElem) => {
+            tdElem.classList.add("py-4", "font-semibold", "text-center");
+        });
+
         if (nRows >= 2) {
             let nCols = Array.from(rows[1].getElementsByTagName("th")).length;
-
-            rows[0].classList.add("table-dark");
-            rows[1].classList.add("table-dark");
 
             if (nCols == 20) { // Is the case in "Lookup for classes"
                 for (let row of rows.slice(2)) {
@@ -263,7 +262,7 @@ function ShowOpenAndClosedClasses() {
                     const nRemaining = parseInt(cols[13].innerText);
                     const nWLRemaining = parseInt(cols[16].innerText);
 
-                    row.classList.add(GetClassRowClassName(nRemaining, nWLRemaining));
+                    row.classList.add(GetClassTableItemClassName(nRemaining, nWLRemaining));
                 }
             }
         }
@@ -271,6 +270,10 @@ function ShowOpenAndClosedClasses() {
 }
 
 async function GTUI_Start(event) {
+    if (window.location.href == "https://oscar.gatech.edu/") {
+        return;
+    }
+
     await InsertTemplate();
 
     InsertLogoSRCs();
