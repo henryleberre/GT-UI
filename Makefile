@@ -14,15 +14,12 @@ make_generic = \
 	convert -resize 48x48   ./gtui_icon.png ./_build/src/$(1)/gtui_icons/icon48x48.png; \
 	convert -resize 32x32   ./gtui_icon.png ./_build/src/$(1)/gtui_icons/icon32x32.png; \
 	convert -resize 16x16   ./gtui_icon.png ./_build/src/$(1)/gtui_icons/icon16x16.png; \
-	cp -a ./src/ ./_build/src/$(1)/;
+	cp -a ./src/ ./_build/src/$(1)/; \
+	mkdir -p _build/zip/; \
+	cd ./_build/src/$(1)/ && zip -r9 ./../../zip/$(1).zip ./; \
 
 chromium:
 	$(call make_generic,chromium,v3.json)
-	google-chrome --no-message-box --pack-extension=_build/src/chromium --pack-extension-key=keys/chromium_private.pem
-
-chromium_sign: chromium
-	mkdir -p ./_build/dist/chromium
-	mv ./_build/src/chromium.crx ./_build/dist/chromium/
 
 firefox:
 	$(call make_generic,firefox,v2.json)
