@@ -1,23 +1,6 @@
 <h1 align="center">GT UI</h1>
 
-## Download links
-
-<p align="center">
-  <a rel="noreferrer noopener" href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee/overview?hl=en">
-    <img src="https://github.com/alrra/browser-logos/blob/main/src/chrome/chrome_64x64.png?raw=true">
-    <img src="https://github.com/alrra/browser-logos/blob/main/src/brave/brave_64x64.png?raw=true">
-    <img src="https://github.com/alrra/browser-logos/blob/main/src/chromium/chromium_64x64.png?raw=true">
-    <img src="https://github.com/alrra/browser-logos/blob/main/src/edge/edge_64x64.png?raw=true">
-    <img src="https://github.com/alrra/browser-logos/blob/main/src/opera/opera_64x64.png?raw=true">
-    <img src="https://github.com/alrra/browser-logos/blob/main/src/vivaldi/vivaldi_64x64.png?raw=true">
-  </a>
-  <a rel="noreferrer noopener" href="https://addons.mozilla.org/en-US/firefox/addon/gt-ui/">
-    <img src="https://github.com/alrra/browser-logos/blob/main/src/firefox/firefox_64x64.png?raw=true">
-    <img src="https://github.com/alrra/browser-logos/blob/main/src/tor/tor_64x64.png?raw=true">
-  </a>
-</p>
-
-GT-UI is available for most modern browsers that are forks of either Chromium or Firefox. Support for others like Safari is not yet established.
+## Get it [here](https://henryleberre.github.io/GT-UI/)
 
 ## Our mission
 
