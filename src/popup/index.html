@@ -6,28 +6,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GT UI</title>
-    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <header>
-        GT UI
+    <header class="h-12 flex flex-row text-xl items-center justify-center w-96 text-white text-center font-bold" style="width: 600px; background-color: rgb(30, 30, 30);">
+        <div>OSCAR +</div>
     </header>
 
-    <main>
-        <center><i>"Making Georgia Tech's class registration system as beautiful as its payment gateway."</i></center>
-        <br />
-        <strong><h3>Like the project ?</h3></strong>
-        <ul>
-            <li><a target="_blank" href="https://github.com/henryleberre/GT-UI">Star the project on Github !</a></li>
-            <li>Share it with your friends! No matter the browser - almost ')</li>
-            <li>You can also contribute to this project to make it even better!</li>
-        </ul>
-    </main>
+    <div style="background-color: blueviolet;">
+        <div class="container flex items-center mx-auto gap-2 md:gap-5 px-5 flex-col py-6">
+            <div class="text-center font-bold text-2xl text-white">Contribute to the project!</div>
 
-    <footer>
-        &copy; Henry LE BERRE 2021
-    </footer>
+            <div class="text-white flex flex-col md:flex-row gap-4">
+                <a target="_blank"
+                    class="flex justify-between flex-col items-center border-2 rounded-lg border-white p-4"
+                    href="https://cash.app/$henryleberre">
+                    <img class="flex-initial transform hover:rotate-180 transition duration-500 ease-in-out"
+                        src="cash_app_qr_code.png" width="90" />
+                    <div class="flex-1 flex justify-center flex-col">
+                        <div class="text-center">Cash App</div>
+                        <div class="text-center text-gray-300">Buy us a Croissant</div>
+                    </div>
+                </a>
+                <a target="_blank"
+                    class="flex justify-between flex-col items-center border-2 rounded-lg border-white p-4"
+                    href="https://github.com/henryleberre/GT-UI">
+                    <img class="flex-initial transform hover:rotate-180 transition duration-500 ease-in-out"
+                        src="github_white_icon.png" width="90" />
+                    <div class="flex-1 flex justify-center flex-col">
+                        <div class="text-center">Github</div>
+                        <div class="text-center text-gray-300">Improve the extension <br> Give Feedback</div>
+                    </div>
+                </a>
+                <div class="flex justify-between flex-col items-center border-2 rounded-lg border-white p-4">
+                    <img class="flex-initial transform hover:rotate-180 transition duration-500 ease-in-out" src="venmo_qr_code.png"
+                        width="90" />
+                    <div class="flex-1 flex justify-center flex-col">
+                        <div class="text-center">Venmo</div>
+                        <div class="text-center text-gray-300">Buy us a Croissant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
