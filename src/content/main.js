@@ -193,7 +193,7 @@ function GenerateGridMenu() {
 
 function GenerateAlerts() {
     GetElementsByClassNameForeach(document, "infotextdiv", (warningElem) => {
-        warningElem.classList.add("bg-yellow-400", "p-5", "rounded-md");
+        warningElem.classList.add("bg-yellow-200", "p-5", "rounded-md");
     });
 }
 
@@ -227,16 +227,22 @@ function PrettyTables() {
     });
 }
 
+function PrettyInputs() {
+    QuerySelectorAllForeach(document, "input[type='submit'],input[type='reset'],button,select", (e) => {
+        e.classList.add("p-2", "bg-black", "text-white", "cursor-pointer");
+    });
+}
+
 function GetClassTableItemClassName(nRemaining, nWLRemaining) {
     if (nRemaining > 0) {
-        return "bg-green-500";
+        return "bg-green-200";
     }
 
     if (nWLRemaining > 0) {
-        return "bg-yellow-500";
+        return "bg-yellow-200";
     }
 
-    return "bg-red-500";
+    return "bg-red-200";
 }
 
 function ShowOpenAndClosedClasses() {
@@ -282,6 +288,7 @@ async function GTUI_Start(event) {
     GenerateAlerts();
     RemoveBadHTML();
     PrettyTables();
+    PrettyInputs();
     ShowOpenAndClosedClasses();
 }
 

@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "OSCAR+",
-    "version": "1.5",
+    "version": "1.6",
     "icons": {
         "128": "gtui_icons/icon128x128.png",
         "64": "gtui_icons/icon64x64.png",
