@@ -9,6 +9,12 @@ const JAVASCRIPT_FILENAMES = [
 
 ];
 
+const COLOR_CLASSES = {
+    "SUCCESS": "bg-green-200",
+    "WARNING": "bg-yellow-200",
+    "ERROR":   "bg-red-200"
+};
+
 function IncludeCSSFile(filename) {
     let link  = document.createElement("link");
     link.href = GetExtensionURL(filename);
@@ -205,25 +211,17 @@ function RemoveBadHTML() {
     });
 }
 
-function ShouldMakeTableHeaderDark(tableElem, nRows) {
-    if (nRows == 0)
-        return false;
-
-    if (window.location.href.endsWith("bprod/bwskfshd.P_CrseSchd"))
-        return true;
-
-    return false;
-}
-
 function PrettyTables() {
     GetElementsByTagNameForeach(document, "table", (tableElem) => {
         tableElem.classList.add("mx-auto");
 
-        let rows = Array.from(tableElem.getElementsByTagName("tr"));
+        GetElementsByTagNameForeach(document, "th", (tdElem) => {
+            tdElem.classList.add("border", "py-4", "font-semibold", "text-white", "bg-black", "text-center");
+        });
 
-        if (ShouldMakeTableHeaderDark(tableElem, rows.length)) { // If "Week at a glance"
-            rows[0].classList.add("table-dark");
-        }
+        GetElementsByTagNameForeach(document, "td", (tdElem) => {
+            tdElem.classList.add("border", "py-4", "font-semibold", "text-center");
+        });
     });
 }
 
@@ -231,49 +229,54 @@ function PrettyInputs() {
     QuerySelectorAllForeach(document, "input[type='submit'],input[type='reset'],button,select", (e) => {
         e.classList.add("p-2", "bg-black", "text-white", "cursor-pointer");
     });
-}
 
-function GetClassTableItemClassName(nRemaining, nWLRemaining) {
-    if (nRemaining > 0) {
-        return "bg-green-200";
-    }
-
-    if (nWLRemaining > 0) {
-        return "bg-yellow-200";
-    }
-
-    return "bg-red-200";
-}
-
-function ShowOpenAndClosedClasses() {
-    GetElementsByTagNameForeach(document, "table", (tableElem) => {
-        let rows  = Array.from(tableElem.getElementsByTagName("tr"));
-        let nRows = rows.length;
-
-        GetElementsByTagNameForeach(document, "th", (tdElem) => {
-            tdElem.classList.add("py-4", "font-semibold", "text-white", "bg-black", "text-center");
-        });
-
-        GetElementsByTagNameForeach(document, "td", (tdElem) => {
-            tdElem.classList.add("py-4", "font-semibold", "text-center");
-        });
-
-        if (nRows >= 2) {
-            let nCols = Array.from(rows[1].getElementsByTagName("th")).length;
-
-            if (nCols == 20) { // Is the case in "Lookup for classes"
-                for (let row of rows.slice(2)) {
-                    const cols = Array.from(row.getElementsByTagName("td"));
-
-                    const nRemaining = parseInt(cols[13].innerText);
-                    const nWLRemaining = parseInt(cols[16].innerText);
-
-                    row.classList.add(GetClassTableItemClassName(nRemaining, nWLRemaining));
-                }
-            }
-        }
+    QuerySelectorAllForeach(document, "input[type='text']", (e) => {
+        e.classList.add("p-2", "border-2", "border-black");
     });
 }
+
+function TableApplyClassToTDRowsWith(table, fncGetClass) {
+    for (let row of Array.from(table.getElementsByTagName("tr"))) {
+        let cells = row.getElementsByTagName("td");
+
+        if (cells.length == 0)
+            continue;
+
+        row.classList.add(fncGetClass(cells));
+    }
+}
+
+function SectionClassSearchAddOpenClosedColors() {
+    GetElementsByTagNameForeach(document, "table", (table) => {
+        TableApplyClassToTDRowsWith(table, (cells) => {
+            if (cells.length != 20)
+                return;
+
+            const nRemaining   = parseInt(cells[13].innerText);
+            const nWLRemaining = parseInt(cells[16].innerText);
+    
+            return (nRemaining > 0) ? COLOR_CLASSES["SUCCESS"] : ((nWLRemaining > 0) ? COLOR_CLASSES["WARNING"] : COLOR_CLASSES["ERROR"]);
+        });
+    });
+}
+
+const PAGE_URL_FUNC_MAP = {
+    "bwskfcls.P_GetCrse": () => { // Simple section class search
+        SectionClassSearchAddOpenClosedColors();
+    },
+    "bwskfreg.P_AltPin": () => { // Add/Drop Classes
+        QuerySelectorAllForeach(document, "table[summary='Current Schedule']", (table) => {
+            TableApplyClassToTDRowsWith(table, (cells) => {
+                const isWaitlisted = cells[0].innerText.includes("Wait Listed Course");
+
+                return (!isWaitlisted) ? COLOR_CLASSES["SUCCESS"] : COLOR_CLASSES["WARNING"];
+            });
+        });
+    },
+    "bwskfcls.P_GetCrse_Advanced": () => { // Advanced section class search
+        SectionClassSearchAddOpenClosedColors();
+    }
+};
 
 async function GTUI_Start(event) {
     if (window.location.href == "https://oscar.gatech.edu/") {
@@ -289,11 +292,10 @@ async function GTUI_Start(event) {
     RemoveBadHTML();
     PrettyTables();
     PrettyInputs();
-    ShowOpenAndClosedClasses();
+
+    const endURL = window.location.href.split("/bprod/")[1];
+    if (endURL in PAGE_URL_FUNC_MAP)
+        PAGE_URL_FUNC_MAP[endURL]();
 }
 
-if (document.readyState != "complete") {
-    window.addEventListener("load", GTUI_Start);
-} else {
-    GTUI_Start();
-}
+GTUI_Start();
