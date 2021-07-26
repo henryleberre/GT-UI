@@ -13,6 +13,10 @@
         {
           "version": "1.6",
           "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.6/Firefox.xpi"
+        },
+        {
+          "version": "1.7",
+          "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.7/Firefox.xpi"
         }
       ]
     }
