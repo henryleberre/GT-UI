@@ -2,7 +2,7 @@ let browserHandle   = (typeof browser != 'undefined') ? browser : chrome;
 let GetExtensionURL = browserHandle.runtime.getURL;
 
 const CSS_FILENAMES = [
-    "src/lib/tailwind.min.css",
+    "content/tailwind.min.css",
 ];
 
 const JAVASCRIPT_FILENAMES = [
@@ -90,7 +90,7 @@ async function InsertTemplate() {
     });
 
     // Load Template
-    document.body.innerHTML = await LoadFileContents("src/content/gtui.html");    
+    document.body.innerHTML = await LoadFileContents("content/index.html");    
 
     // Insert OSCAR's Body Elements Into The Template
     bodyNodes.forEach((e) => {
@@ -102,11 +102,11 @@ async function InsertTemplate() {
 
 function InsertLogoSRCs() {
     GetElementByIdAndDo("GTUI_gtLogo", (e) => {
-        e.src = GetExtensionURL("src/content/gt-logo.svg");
+        e.src = GetExtensionURL("res/gt-logo.svg");
     });
 
     GetElementByIdAndDo("GTUI_githubLogo", (e) => {
-        e.src = GetExtensionURL("src/content/github-logo.svg");
+        e.src = GetExtensionURL("res/github-logo.svg");
     });
 }
 

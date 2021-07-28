@@ -1,3 +1,2 @@
-*.zip
-keys/
-_build/
+build/
+keys/*.txt
