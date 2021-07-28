@@ -1,46 +1,44 @@
 {
     "manifest_version": 2,
     "name": "OSCAR+",
-    "version": "1.7",
+    "version": "1.8",
     "icons": {
-        "128": "gtui_icons/icon128x128.png",
-        "64": "gtui_icons/icon64x64.png",
-        "48": "gtui_icons/icon48x48.png",
-        "32": "gtui_icons/icon32x32.png",
-        "16": "gtui_icons/icon16x16.png"
+        "128": "icons/icon128x128.png",
+        "64":  "icons/icon64x64.png",
+        "48":  "icons/icon48x48.png",
+        "32":  "icons/icon32x32.png",
+        "16":  "icons/icon16x16.png"
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "https://oscar.gatech.edu/*"
-            ],
-            "js": [
-                "src/content/main.js"
-            ]
-        }
-    ],
+    "content_scripts": [{
+        "matches": [
+            "https://oscar.gatech.edu/*"
+        ],
+        "js": [
+            "content/index.js"
+        ]
+    }],
     "web_accessible_resources": [
-        "src/content/gtui.css",
-        "src/content/gtui.html",
-        "src/content/gt-logo.svg",
-        "src/content/github-logo.svg",
-        "src/lib/tailwind.min.css"
+        "content/index.html",
+        "content/tailwind.min.css",
+
+        "res/gt-logo.svg",
+        "res/github-logo.svg"
     ],
     "browser_action": {
         "default_icon": {
-            "128": "gtui_icons/icon128x128.png",
-            "64": "gtui_icons/icon64x64.png",
-            "48": "gtui_icons/icon48x48.png",
-            "32": "gtui_icons/icon32x32.png",
-            "16": "gtui_icons/icon16x16.png"
+            "128": "icons/icon128x128.png",
+            "64":  "icons/icon64x64.png",
+            "48":  "icons/icon48x48.png",
+            "32":  "icons/icon32x32.png",
+            "16":  "icons/icon16x16.png"
         },
         "default_title": "GT UI",
-        "default_popup": "src/popup/index.html"
+        "default_popup": "popup/index.html"
     },
     "browser_specific_settings": {
         "gecko": {
             "id": "{5c7a5cfb-c809-4f1d-9e7a-3eeebf72e191}",
             "update_url": "https://henryleberre.github.io/GT-UI/updates.json"
         }
-      }
+    }
 }
