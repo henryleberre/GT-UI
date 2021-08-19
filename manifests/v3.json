@@ -13,15 +13,17 @@
         "matches": [
             "https://oscar.gatech.edu/*"
         ],
+        "css": [
+            "content/tailwind.min.css"
+        ],
         "js": [
             "content/index.js"
         ]
     }],
     "web_accessible_resources": [{
-        "resources": [
+        "resources": [    
             "content/index.html",
-            "content/tailwind.min.css",
-    
+
             "res/gt-logo.svg",
             "res/github-logo.svg"
         ],

@@ -1,44 +1,17 @@
 let browserHandle   = (typeof browser != 'undefined') ? browser : chrome;
 let GetExtensionURL = browserHandle.runtime.getURL;
 
-const CSS_FILENAMES = [
-    "content/tailwind.min.css",
-];
-
-const JAVASCRIPT_FILENAMES = [
-
-];
-
 const COLOR_CLASSES = {
     "SUCCESS": "bg-green-200",
     "WARNING": "bg-yellow-200",
     "ERROR":   "bg-red-200"
 };
 
-function IncludeCSSFile(filename) {
-    let link  = document.createElement("link");
-    link.href = GetExtensionURL(filename);
-    link.rel  = "stylesheet";
-
-    document.head.appendChild(link);
-}
-
-function IncludeJavascriptFile(filename) {
-    let script  = document.createElement("script");
-    script.src  = GetExtensionURL(filename);
-    script.type = "text/javascript";
-    document.head.appendChild(script);
-}
-
 async function LoadFileContents(filename) {
     let fetched = await fetch(GetExtensionURL(filename));
     let text    = await fetched.text();
 
     return text;
-}
-
-function ImportJavascriptModule(filename) {
-    return import(GetExtensionURL(filename));
 }
 
 function GetElementByIdAndDo(id, callback) {
@@ -76,10 +49,6 @@ async function InsertTemplate() {
     QuerySelectorAllForeach(document.head, "link[rel='stylesheet']", (lnk) => {
         lnk.remove();
     });
-
-    // Add stylesheets & JS
-    CSS_FILENAMES.forEach(IncludeCSSFile);
-    JAVASCRIPT_FILENAMES.forEach(IncludeJavascriptFile);
 
     // Extract Body Elements From OSCAR's Loaded Page
     let bodyNodes = [];
@@ -142,15 +111,13 @@ function GenerateGridMenu() {
         let menuDiv = CreateChildOfType(pageContentElem, "div", "", "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4", "");
 
         for (let idx = 0; idx < menuTDs.length; idx++) {
-            let cardColElem      = CreateChildOfType(menuDiv,        "div", "", "rounded-xl shadow-2xl", "");
-            let cardElem         = CreateChildOfType(cardColElem,    "div", "", "",    "");
-            let cardHeaderElem   = CreateChildOfType(cardElem,       "div", "", "",    "");
-            let cardBodyElem     = CreateChildOfType(cardElem,       "div", "", "p-4 text-xl", "");
-            let cardBodyTextElem = CreateChildOfType(cardBodyElem,   "p",   "", "",    "");
-            let cardLink         = CreateChildOfType(cardHeaderElem, "a",   "", "text-center w-full p-4 rounded-md bg-black text-white text-2xl", "display: inline-block;");
+            let cardElem           = CreateChildOfType(menuDiv,        "div",  "", "rounded-xl shadow-2xl flex flex-col",              "");
+            let cardHeaderElem     = CreateChildOfType(cardElem,       "a",    "", "flex text-center text-white text-2xl items-center w-full p-4 rounded-md bg-black", "");
+            let cardHeaderSpanElem = CreateChildOfType(cardHeaderElem, "span", "", "w-full",           "");
+            let cardBodyElem       = CreateChildOfType(cardElem,       "div",  "", "p-4 text-xl text-justify",                         "");
             
-            cardLink.innerText = "Visit";
-            cardLink.href      = menuTDs[idx].getElementsByTagName("a")[0].href;
+            cardHeaderElem.href = menuTDs[idx].getElementsByTagName("a")[0].href;
+            cardHeaderSpanElem.innerText = "Visit";
 
             // Link
             GetElementsByTagNameForeach(menuTDs[idx], "a", (linkElem) => {
@@ -158,10 +125,10 @@ function GenerateGridMenu() {
                     if (linkElem.innerText.trim().length == 0) {
                         linkElem.remove();
                     } else {
-                        cardLink.innerText = linkElem.innerText;
+                        cardHeaderSpanElem.innerText = linkElem.innerText;
                     }
                 } else {
-                    cardLink.innerText = [
+                    cardHeaderSpanElem.innerText = [
                         "Student Services & Financial Aid",
                         "Personal Information",
                         "Campus Services",
@@ -180,15 +147,20 @@ function GenerateGridMenu() {
 
                 if (descriptionTextRaw.includes(';')) {
                     // Turn lists (of ";" seperated values) into actual <ul><li> ones
-                    let list = CreateChildOfType(cardBodyTextElem, "ul", "", "", "");
+                    let list = CreateChildOfType(cardBodyElem, "ul", "", "", "");
 
                     for (let listElementText of descriptionTextRaw.split(';')) {
-                        let listElement = CreateChildOfType(list, "li", "", "border-black list-none rounded-sm px-3 py-3", "");
+                        let listElement = CreateChildOfType(list, "li", "", "border-b border-black list-none rounded-sm px-3 py-3", "");
                         listElement.innerText = listElementText;
                     }
                 } else {
                     // Otherwise, simply paste the description text
-                    cardBodyTextElem.innerText = descriptionTextRaw;
+                    cardBodyElem.innerText = descriptionTextRaw;
+
+                    if (cardBodyElem.innerHTML.trim() == "") {
+                        cardBodyElem.classList.add("hidden");
+                        cardHeaderElem.classList.add("flex-1");
+                    }
                 }
             }
         }
