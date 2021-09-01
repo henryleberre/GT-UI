@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "OSCAR+",
-    "version": "1.8",
+    "version": "1.9",
     "icons": {
         "128": "icons/icon128x128.png",
         "64":  "icons/icon64x64.png",

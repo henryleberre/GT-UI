@@ -112,7 +112,7 @@ function GenerateGridMenu() {
 
         for (let idx = 0; idx < menuTDs.length; idx++) {
             let cardElem           = CreateChildOfType(menuDiv,        "div",  "", "rounded-xl shadow-2xl flex flex-col",              "");
-            let cardHeaderElem     = CreateChildOfType(cardElem,       "a",    "", "flex text-center text-white text-2xl items-center w-full p-4 rounded-md bg-black", "");
+            let cardHeaderElem     = CreateChildOfType(cardElem,       "a",    "", "flex text-center text-white text-2xl items-center w-full p-4 rounded-md bg-black hover:bg-yellow-400 transition duration-300", "");
             let cardHeaderSpanElem = CreateChildOfType(cardHeaderElem, "span", "", "w-full",           "");
             let cardBodyElem       = CreateChildOfType(cardElem,       "div",  "", "p-4 text-xl text-justify",                         "");
             
