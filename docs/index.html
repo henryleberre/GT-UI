@@ -7,88 +7,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get OSCAR+</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style type="text/css">
+        .custom-shape-divider-top-1630533911 {
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .custom-shape-divider-top-1630533911 svg {
+            position: relative;
+            display: block;
+            width: calc(229% + 1.3px);
+            height: 50px;
+            transform: rotate(180deg);
+        }
+
+        .custom-shape-divider-top-1630533911 .shape-fill {
+            fill: #1F2937;
+        }
+
+        .custom-shape-divider-bottom-1630533354 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .custom-shape-divider-bottom-1630533354 svg {
+            position: relative;
+            display: block;
+            width: calc(146% + 1.3px);
+            height: 150px;
+        }
+
+        .custom-shape-divider-bottom-1630533354 .shape-fill {
+            fill: #1F2937;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="h-screen flex flex-col bg-indigo-700">
-        <header class="flex-none pt-0 md:pt-10 mx-auto container flex-1">
-            <nav class="md:justify-start py-5 mx-auto flex items-center gap-5">
+    <div class="h-screen flex flex-col">
+        <header class="bg-gray-800 flex-none py-0 md:py-5 w-full flex-1">
+            <nav class="md:justify-start py-5 mx-auto flex mx-auto container items-center gap-5">
                 <div class="pl-3 md:pl-0 flex-1 text-3xl text-white font-extrabold">OSCAR+</div>
                 <div class="pr-3 md:pr-0 flex flex-row gap-5">
-                    <a target="_blank" href="https://www.linkedin.com/in/henryleberre/"><img width="48" src="linkedin_icon.png"></a>
-                    <a target="_blank" href="http://github.com/henryleberre/GT-UI"><img width="48" src="github_white_icon.png"></a>
+                    <a class="w-10" target="_blank" href="https://www.linkedin.com/in/henryleberre/"><img width="48"
+                            src="linkedin_icon.png"></a>
+                    <a class="w-10" target="_blank" href="http://github.com/henryleberre/GT-UI"><img width="48"
+                            src="github_white_icon.png"></a>
                 </div>
             </nav>
         </header>
-
-        <div class="justify-center bg-indigo-700 flex-1 container mx-auto text-white flex flex-col md:flex-row items-center gap-10">
-            <div class="w-full flex-initial h-auto rounded-xl shadow-2xl p-5">
-                <div class="text-3xl md:text-5xl font-extrabold italic text-center">OSCAR like it's 2021</div>
-                <div class="text-md py-2 md:py-5 flex flex-col md:flex-row">
-                    <ul class="flex-1 list-inside">
-                        <li style="list-style-type: circle;">Register for your classes with an edge</li>
-                        <li style="list-style-type: circle;">It's free, seamless, and community-driven</li>
-                    </ul>
-                    <ul class="flex-1 list-inside">
-                        <li style="list-style-type: circle;">An awesome new look for OSCAR</li>
-                        <li style="list-style-type: circle;">It's <a class="italic underline" href="http://github.com/henryleberre/GT-UI" target="_blank">open-source</a></li>
-                    </ul>
+        <div class="bg-indigo-700 custom-shape-divider-top-1630533911">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z"
+                    class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="bg-indigo-700 flex-1 text-white">
+            <div
+                class="w-full h-3/4 justify-center mx-auto container flex flex-col md:flex-row items-center content-center gap-5">
+                <div class="flex-1 h-auto rounded-xl p-2">
+                    <div class="text-3xl md:text-5xl font-extrabold italic text-center">OSCAR like it's 2021</div>
+                    <div class="text-md py-2 md:py-5 flex flex-col md:flex-row">
+                        <ul class="flex-1 list-inside">
+                            <li style="list-style-type: circle;">Register for your classes with an edge</li>
+                            <li style="list-style-type: circle;">It's free, seamless, and community-driven</li>
+                            <li style="list-style-type: circle;">Its creator is half French</li>
+                        </ul>
+                        <ul class="flex-1 list-inside">
+                            <li style="list-style-type: circle;">An awesome new look for OSCAR</li>
+                            <li style="list-style-type: circle;">It's <a class="italic underline"
+                                    href="http://github.com/henryleberre/GT-UI" target="_blank">open-source</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex-1 h-auto rounded-xl shadow-2xl p-2">
+                    <div class="text-2xl font-bold italic text-center">What's your browser?</div>
+                    <div
+                        class="mt-4 md:mt-6 grid gap-2 grid-cols-4 md:grid-cols-5 lg:grid-cols-7 2xl:grid-cols-9 justify-center justify-items-center">
+                        <a style="text-decoration: none; display: inline-block;"
+                            class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
+                            href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
+                            <img
+                                src="https://github.com/alrra/browser-logos/blob/main/src/brave/brave_64x64.png?raw=true">
+                        </a>
+                        <a style="text-decoration: none; display: inline-block;"
+                            class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
+                            href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
+                            <img
+                                src="https://github.com/alrra/browser-logos/blob/main/src/chromium/chromium_64x64.png?raw=true">
+                        </a>
+                        <a style="text-decoration: none; display: inline-block;"
+                            class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
+                            href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
+                            <img
+                                src="https://github.com/alrra/browser-logos/blob/main/src/edge/edge_64x64.png?raw=true">
+                        </a>
+                        <a style="text-decoration: none; display: inline-block;"
+                            class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
+                            href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
+                            <img
+                                src="https://github.com/alrra/browser-logos/blob/main/src/opera/opera_64x64.png?raw=true">
+                        </a>
+                        <a style="text-decoration: none; display: inline-block;"
+                            class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
+                            href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
+                            <img
+                                src="https://github.com/alrra/browser-logos/blob/main/src/chrome/chrome_64x64.png?raw=true">
+                        </a>
+                        <a style="text-decoration: none; display: inline-block;"
+                            class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
+                            href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
+                            <img
+                                src="https://github.com/alrra/browser-logos/blob/main/src/vivaldi/vivaldi_64x64.png?raw=true">
+                        </a>
+                        <a style="text-decoration: none; display: inline-block;"
+                            class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
+                            href="https://github.com/henryleberre/GT-UI/releases/download/1.9/Firefox.xpi">
+                            <img
+                                src="https://github.com/alrra/browser-logos/blob/main/src/firefox/firefox_64x64.png?raw=true">
+                        </a>
+                        <a style="text-decoration: none; display: inline-block;"
+                            class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
+                            href="https://github.com/henryleberre/GT-UI/releases/download/1.9/Firefox.xpi">
+                            <img src="https://github.com/alrra/browser-logos/blob/main/src/tor/tor_64x64.png?raw=true">
+                        </a>
+                    </div>
+                    <div class="text-md py-2 md:py-5 text-center">Click on your browser to install.
+                    </div>
                 </div>
             </div>
-            <div class="w-full flex-initial h-auto rounded-xl shadow-2xl p-5">
-                <div class="text-2xl font-bold italic text-center">What's your browser?</div>
-                <div
-                    class="mt-4 md:mt-6 grid gap-2 grid-cols-4 md:grid-cols-5 lg:grid-cols-7 2xl:grid-cols-9 justify-center justify-items-center">
-                    <a style="text-decoration: none; display: inline-block;"
-                        class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
-                        href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
-                        <img src="https://github.com/alrra/browser-logos/blob/main/src/brave/brave_64x64.png?raw=true">
-                    </a>
-                    <a style="text-decoration: none; display: inline-block;"
-                        class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
-                        href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
-                        <img
-                            src="https://github.com/alrra/browser-logos/blob/main/src/chromium/chromium_64x64.png?raw=true">
-                    </a>
-                    <a style="text-decoration: none; display: inline-block;"
-                        class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
-                        href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
-                        <img src="https://github.com/alrra/browser-logos/blob/main/src/edge/edge_64x64.png?raw=true">
-                    </a>
-                    <a style="text-decoration: none; display: inline-block;"
-                        class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
-                        href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
-                        <img src="https://github.com/alrra/browser-logos/blob/main/src/opera/opera_64x64.png?raw=true">
-                    </a>
-                    <a style="text-decoration: none; display: inline-block;"
-                        class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
-                        href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
-                        <img
-                            src="https://github.com/alrra/browser-logos/blob/main/src/chrome/chrome_64x64.png?raw=true">
-                    </a>
-                    <a style="text-decoration: none; display: inline-block;"
-                        class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
-                        href="https://chrome.google.com/webstore/detail/gt-ui/fcjdbonkjmoampkihabopmahicdimcee">
-                        <img
-                            src="https://github.com/alrra/browser-logos/blob/main/src/vivaldi/vivaldi_64x64.png?raw=true">
-                    </a>
-                    <a style="text-decoration: none; display: inline-block;"
-                        class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
-                        href="https://github.com/henryleberre/GT-UI/releases/download/1.9/Firefox.xpi">
-                        <img
-                            src="https://github.com/alrra/browser-logos/blob/main/src/firefox/firefox_64x64.png?raw=true">
-                    </a>
-                    <a style="text-decoration: none; display: inline-block;"
-                        class="transform hover:rotate-180 hover:scale-150 transition duration-500 ease-in-out"
-                        href="https://github.com/henryleberre/GT-UI/releases/download/1.9/Firefox.xpi">
-                        <img src="https://github.com/alrra/browser-logos/blob/main/src/tor/tor_64x64.png?raw=true">
-                    </a>
-                </div>
-                <div class="text-md py-2 md:py-5 text-center">Click on your browser to install.
+        </div>
+        <div class="custom-shape-divider-bottom-1630533354">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="shape-fill"></path>
+            </svg>
+        </div>
+    </div>
+    <div class="bg-gray-800 py-4">
+        <div class="container mx-auto">
+            <div class="font-bold text-white text-center text-3xl">Our Team shall Prevail</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 py-5 gap-10">
+                <div class="content-center bg-white shadow-2xl p-5 rounded-lg flex flex-row gap-5">
+                    <div class="flex-initial flex flex-col justify-center gap-3">
+                        <img class="rounded-full w-32" src="henry_face.jpg">
+                        <div class="text-center font-bold">Henry Le Berre</div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <span class="text-justify">I'm the creator and lead programmer of OSCAR+, and a CS-freshman at Georgia Tech. I just moved from Paris, France as I'm a French-American dual-citizen.
+                            Feel free to contact me at any time via email at <a href="mailto:henryleberre@gatech.edu"
+                                class="italic underline">henryleberre@gatech.edu</a> or any other platform, if you have
+                            questions, feedback, or just want to talk!</span>
+                        <div
+                            class="border-1 border-t border-black pt-2 text-center font-bold flex flex-row justify-center gap-2">
+                            <a href="https://github.com/henryleberre" target="_blank">
+                                <div class="w-6 rounded-full" style="filter: invert(100%);">
+                                    <img src="github_white_icon.png">
+                                </div>
+                            </a>
+                            <a href="https://www.linkedin.com/in/henryleberre/" target="_blank">
+                                <div class="w-6 rounded-full">
+                                    <img src="linkedin_icon.png">
+                                </div>
+                            </a>
+                            <a href="https://www.instagram.com/henryleberre/" target="_blank">
+                                <div class="w-6 rounded-full">
+                                    <img src="instagram_logo.png">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
