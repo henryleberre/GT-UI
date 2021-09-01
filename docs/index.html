@@ -9,33 +9,34 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="h-screen flex flex-col" style="background-color: rgb(30, 30, 30);">
-    <header class="flex-none" style="background-color: rgb(30, 30, 30);">
-        <nav class="container mx-auto py-5 px-5 flex items-center gap-5">
-            <img src="https://github.com/henryleberre/GT-UI/blob/master/res/icon.png?raw=true" width="40" />
-            <div class="text-xl text-white font-bold">OSCAR+</div>
-        </nav>
-    </header>
+<body>
+    <div class="h-screen flex flex-col bg-indigo-700">
+        <header class="flex-none pt-0 md:pt-10 mx-auto container flex-1">
+            <nav class="md:justify-start py-5 mx-auto flex items-center gap-5">
+                <div class="pl-3 md:pl-0 flex-1 text-3xl text-white font-extrabold">OSCAR+</div>
+                <div class="pr-3 md:pr-0 flex flex-row gap-5">
+                    <a target="_blank" href="https://www.linkedin.com/in/henryleberre/"><img width="48" src="linkedin_icon.png"></a>
+                    <a target="_blank" href="http://github.com/henryleberre/GT-UI"><img width="48" src="github_white_icon.png"></a>
+                </div>
+            </nav>
+        </header>
 
-    <div class="md:py-40" style="background-color: #6c5ce7;">
-        <div
-            class="container text-white rounded-xl mt-3 shadow-2xl flex items-center mx-auto gap-5 md:gap-12 px-5 flex-col md:flex-row py-5 md:py-12">
-            <div class="md:flex-1 flex flex-col items-center">
-                <div class="text-2xl lg:text-3xl font-bold text-center">Let's make OSCAR beautiful.</div>
-                <div class="py-5 text-justify">
-                    <p>Making Georgia Tech's class registration system as beautiful as its payment gateway.</p>
-                    <ul class="list-disc list-inside">
-                        <li>Free Browser Extension</li>
-                        <li>Makes OSCAR look nicer</li>
-                        <li>Works on most browsers</li>
-                        <li>Open-source</li>
+        <div class="bg-indigo-700 flex-1 container mx-auto text-white flex flex-col md:flex-row items-center gap-10">
+            <div class="w-full flex-initial h-auto rounded-xl shadow-2xl p-5">
+                <div class="text-5xl font-extrabold italic text-center">OSCAR like it's 2021</div>
+                <div class="text-md py-5 flex flex-col md:flex-row">
+                    <ul class="flex-1 list-inside">
+                        <li style="list-style-type: circle;">Register for your classes with an edge</li>
+                        <li style="list-style-type: circle;">It's free, seamless, and community-driven</li>
+                    </ul>
+                    <ul class="flex-1 list-inside">
+                        <li style="list-style-type: circle;">An awesome new look for OSCAR</li>
+                        <li style="list-style-type: circle;">It's <a class="italic underline" href="http://github.com/henryleberre/GT-UI" target="_blank">open-source</a></li>
                     </ul>
                 </div>
-                <div class="text-sm lg:text-base text-gray-200 text-center italic">"For it is together - together - that
-                    we will prevail." - Dwight K. Schrute</div>
             </div>
-            <div class="md:flex-1">
-                <div class="text-2xl lg:text-3xl font-bold text-center">Get the browser extension now!</div>
+            <div class="w-full flex-initial h-auto rounded-xl shadow-2xl">
+                <div class="text-2xl font-bold italic text-center">What's your browser?</div>
                 <div
                     class="mt-4 md:mt-6 grid gap-2 grid-cols-4 md:grid-cols-5 lg:grid-cols-7 2xl:grid-cols-9 justify-center justify-items-center">
                     <a style="text-decoration: none; display: inline-block;"
@@ -83,103 +84,11 @@
                         <img src="https://github.com/alrra/browser-logos/blob/main/src/tor/tor_64x64.png?raw=true">
                     </a>
                 </div>
-                <div class="text-center mt-4 md:mt-6">Click on your browser to install. Safari isn't supported - yet.</div>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-
-    <div class="container mt-1 flex items-center mx-auto gap-2 md:gap-5 px-5 flex-col py-6">
-        <div class="text-center font-bold text-2xl text-white">Meet The Team</div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center">
-            <div class="text-black bg-white p-5 flex flex-col items-center rounded-xl">
-                <div class="w-full justify-between flex flex-row items-center">
-                    <div
-                        class="transform hover:rotate-180 transition duration-500 ease-in-out flex-initial w-16 h-16 rounded-full overflow-hidden">
-                        <img class="w-16 h-16 rounded-full" style="transform: scale(1.25);"
-                            src="https://avatars.githubusercontent.com/u/24208000?v=4" />
-                    </div>
-
-                    <div class="flex-1 text-center font-bold">Henry Le Berre</div>
-                </div>
-                <div class="mt-2 w-full border-t-2 py-2">
-                    Instigator, Creator & Programmer.
-                </div>
-                <div class="justify-center flex mt-2 w-full border-t-2 gap-2">
-                    <a target="_blank" href="https://www.instagram.com/henryleberre/"><img class="pt-2 w-6"
-                            src="instagram_logo.png"></a>
-                    <a target="_blank" href="https://github.com/henryleberre/"><img class="pt-2 w-6"
-                            src="github_dark_icon.png"></a>
-                    <a target="_blank" href="https://www.linkedin.com/in/henry-le-berre-355b83211"><img class="pt-2 w-6"
-                            src="linkedin_icon.png"></a>
-                </div>
-            </div>
-
-            <div class="h-full text-black bg-white p-5 flex flex-col items-center rounded-xl">
-                <div class="w-full justify-between flex flex-row items-center">
-                    <div
-                        class="transform hover:rotate-180 transition duration-500 ease-in-out flex-initial w-16 h-16 rounded-full overflow-hidden">
-                        <img class="w-16 h-16 rounded-full" style="transform: scale(1.0);"
-                            src="https://i.pinimg.com/originals/cf/f5/aa/cff5aac1e087caa046569b8054f5ba3f.png" />
-                    </div>
-
-                    <div class="flex-1 font-bold flex flex-col text-center">
-                        <span>Waid Dunlop</span>
-                        <span>Kalob Flint</span>
-                        <span>Niki Wells</span>
-                    </div>
-                </div>
-                <div class="mt-2 w-full w-full border-t-2 py-2">
-                    Friendly Contributors.
-                </div>
-                <div class="justify-center flex mt-2 w-full border-t-2 gap-2">
-
+                <div class="text-md py-5 text-center">Click on your browser to install.
                 </div>
             </div>
         </div>
     </div>
-
-    <hr>
-
-    <div style="background-color: blueviolet;">
-        <div class="container mt-1 flex items-center mx-auto gap-2 md:gap-5 px-5 flex-col py-6">
-            <div class="text-center font-bold text-2xl text-white">Contribute to the project!</div>
-
-            <div class="text-white flex flex-col md:flex-row gap-4">
-                <a target="_blank"
-                    class="flex justify-between flex-col items-center border-2 rounded-lg border-white p-4"
-                    href="https://cash.app/$henryleberre">
-                    <img class="flex-initial transform hover:rotate-180 transition duration-500 ease-in-out"
-                        src="cash_app_qr_code.png" width="90" />
-                    <div class="flex-1 flex justify-center flex-col">
-                        <div class="text-center">Cash App</div>
-                        <div class="text-center text-gray-300">Buy us a Croissant</div>
-                    </div>
-                </a>
-                <a target="_blank"
-                    class="flex justify-between flex-col items-center border-2 rounded-lg border-white p-4"
-                    href="https://github.com/henryleberre/GT-UI">
-                    <img class="flex-initial transform hover:rotate-180 transition duration-500 ease-in-out"
-                        src="github_white_icon.png" width="90" />
-                    <div class="flex-1 flex justify-center flex-col">
-                        <div class="text-center">Github</div>
-                        <div class="text-center text-gray-300">Improve the extension <br> Give Feedback</div>
-                    </div>
-                </a>
-                <div class="flex justify-between flex-col items-center border-2 rounded-lg border-white p-4">
-                    <img class="flex-initial transform hover:rotate-180 transition duration-500 ease-in-out" src="venmo_qr_code.png"
-                        width="90" />
-                    <div class="flex-1 flex justify-center flex-col">
-                        <div class="text-center">Venmo</div>
-                        <div class="text-center text-gray-300">Buy us a Croissant</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </main>
 </body>
 
 </html>
