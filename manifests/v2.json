@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "OSCAR+",
-    "version": "1.9",
+    "version": "2.0",
     "icons": {
         "128": "icons/icon128x128.png",
         "64":  "icons/icon64x64.png",
@@ -37,6 +37,9 @@
         "default_title": "GT UI",
         "default_popup": "popup/index.html"
     },
+    "permissions": [
+        "storage"
+    ],
     "browser_specific_settings": {
         "gecko": {
             "id": "{5c7a5cfb-c809-4f1d-9e7a-3eeebf72e191}",
