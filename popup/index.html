@@ -10,46 +10,26 @@
 </head>
 
 <body>
-    <header class="h-12 flex flex-row text-xl items-center justify-center w-96 text-white text-center font-bold" style="width: 600px; background-color: rgb(30, 30, 30);">
-        <div>OSCAR +</div>
+    <header
+        class="bg-gray-800 h-12 flex flex-row text-xl items-center justify-center w-96 text-white text-center font-bold"
+        style="width: 300px;">
+        <a target="_blank" href="https://henryleberre.github.io/GT-UI/">OSCAR +</a>
     </header>
 
-    <div style="background-color: blueviolet;">
-        <div class="container flex items-center mx-auto gap-2 md:gap-5 px-5 flex-col py-6">
-            <div class="text-center font-bold text-2xl text-white">Contribute to the project!</div>
-
-            <div class="text-white flex flex-row md:flex-row gap-4">
-                <a target="_blank"
-                    class="flex justify-between flex-col items-center border-2 rounded-lg border-white p-4"
-                    href="https://cash.app/$henryleberre">
-                    <img class="flex-initial transform hover:rotate-180 transition duration-500 ease-in-out"
-                        src="cash_app_qr_code.png" width="90" />
-                    <div class="flex-1 flex justify-center flex-col">
-                        <div class="text-center">Cash App</div>
-                        <div class="text-center text-gray-300">Buy us a Croissant</div>
-                    </div>
-                </a>
-                <a target="_blank"
-                    class="flex justify-between flex-col items-center border-2 rounded-lg border-white p-4"
-                    href="https://github.com/henryleberre/GT-UI">
-                    <img class="flex-initial transform hover:rotate-180 transition duration-500 ease-in-out"
-                        src="github_white_icon.png" width="90" />
-                    <div class="flex-1 flex justify-center flex-col">
-                        <div class="text-center">Github</div>
-                        <div class="text-center text-gray-300">Improve the extension <br> Give Feedback</div>
-                    </div>
-                </a>
-                <div class="flex justify-between flex-col items-center border-2 rounded-lg border-white p-4">
-                    <img class="flex-initial transform hover:rotate-180 transition duration-500 ease-in-out" src="venmo_qr_code.png"
-                        width="90" />
-                    <div class="flex-1 flex justify-center flex-col">
-                        <div class="text-center">Venmo</div>
-                        <div class="text-center text-gray-300">Buy us a Croissant</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="w-full bg-white flex flex-row bg-indigo-700 text-white text-center font-bolder text-xl">
+        <div class="flex-1 p-2">Status</div>
+        <button id="btn_on" class="flex-1 p-2">ON</button>
+        <button id="btn_off" class="flex-1 p-2">OFF</button>
     </div>
+
+    <div class="w-full bg-gray-800 text-white font-bold text-md flex flex-row justify-between items-center p-2">
+        <div class="flex-1">by <a target="_blank" href="https://www.linkedin.com/in/henryleberre/" class="italic underline">Henry Le Berre</a></div>
+        <a class="flex-1" target="_blank" href="http://github.com/henryleberre/GT-UI">
+            <img style="float: right;" class="h-7" src="github_white_icon.png">
+        </a>
+    </div>
+
+    <script type="text/javascript" src="index.js"></script>
 </body>
 
 </html>

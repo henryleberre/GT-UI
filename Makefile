@@ -20,7 +20,7 @@ build_common:
 	convert -resize 16x16   ./res/icon.png ./build/common/icons/icon16x16.png
 
 	purgecss --config ./purgecss.config.js --output ./build/common/content/tailwind.min.css --css ./libs/tailwind.min.css --content ./content/index.html ./content/index.js
-	purgecss --config ./purgecss.config.js --output ./build/common/popup/tailwind.min.css   --css ./libs/tailwind.min.css --content ./popup/index.html
+	purgecss --config ./purgecss.config.js --output ./build/common/popup/tailwind.min.css   --css ./libs/tailwind.min.css --content ./popup/index.html ./popup/index.js
 
 	cp -a ./content/* ./build/common/content/
 	cp -a ./popup/* ./build/common/popup/

@@ -250,7 +250,11 @@ const PAGE_URL_FUNC_MAP = {
     }
 };
 
+g_wasGTUI_StartCalled = false;
+
 async function GTUI_Start(event) {
+    g_wasGTUI_StartCalled = true;
+
     if (window.location.href == "https://oscar.gatech.edu/") {
         return;
     }
@@ -270,4 +274,23 @@ async function GTUI_Start(event) {
         PAGE_URL_FUNC_MAP[endURL]();
 }
 
-GTUI_Start();
+browserHandle.storage.sync.get("isOn", (result) => {
+    if (result.isOn == undefined) {
+        browserHandle.storage.sync.set({"isOn": true});
+        GTUI_Start();
+    } else {
+        browserHandle.storage.sync.get("isOn", (result) => {
+            if (result.isOn) {
+                GTUI_Start();
+            }
+        });
+    }
+});
+
+browserHandle.storage.onChanged.addListener((changes, namespace) => {
+    if ("isOn" in changes) {
+        if (changes["isOn"].newValue && !g_wasGTUI_StartCalled) {
+            GTUI_Start();
+        }
+    }
+});
