@@ -43,6 +43,24 @@
         .custom-shape-divider-bottom-1630533354 .shape-fill {
             fill: #1F2937;
         }
+
+        .custom-shape-divider-bottom-1630590292 {
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .custom-shape-divider-bottom-1630590292 svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 75px;
+        }
+
+        .custom-shape-divider-bottom-1630590292 .shape-fill {
+            fill: #047857;
+        }
     </style>
 </head>
 
@@ -135,34 +153,81 @@
                             <img src="https://github.com/alrra/browser-logos/blob/main/src/tor/tor_64x64.png?raw=true">
                         </a>
                     </div>
-                    <div class="text-md py-2 md:py-5 text-center">Click on your browser to install.
+                    <div class="text-md py-2 md:py-5 text-center">
+                        Click on your browser to install.
                     </div>
                 </div>
             </div>
         </div>
-        <div class="hidden md:block bg-indigo-700 custom-shape-divider-bottom-1630533354">
+        <div class="bg-indigo-700 hidden md:block custom-shape-divider-bottom-1630590292">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
                 preserveAspectRatio="none">
-                <path
-                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                    class="shape-fill"></path>
+                <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
             </svg>
         </div>
     </div>
-    <div class="bg-gray-800 py-4">
+    <div class="bg-green-700 py-4">
+        <div class="container mx-auto flex flex-col">
+            <div class="text-white font-bold text-center text-3xl pb-4">Key Features</div>
+            <div class="bg-white rounded-xl p-4">
+                <div class="flex flex-col md:flex-row gap-2 md:gap-5">
+                    <div class="flex-1 flex flex-col justify-center">
+                        <img class="rounded-lg" src="screenshot_1.jpg">
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center gap-2 md:gap-5 pr-4">
+                        <div class="text-center font-bold text-xl">A Modern User Interface</div>
+                        <div class="text-justify text-md">
+                            Menus now span and fill your entire screen to provide a more seamless navigation experience
+                            throughout all of OSCAR.
+                        </div>
+                    </div>
+                </div>
+                <div class="border-1 border-t border-black my-4"></div>
+                <div class="flex flex-col md:flex-row gap-2 md:gap-5">
+                    <div class="flex-1 flex flex-col justify-center">
+                        <img class="rounded-lg" src="screenshot_2.jpg">
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center gap-2 md:gap-5 pr-4">
+                        <div class="text-center font-bold text-xl">Register For Classes Like A Magician</div>
+                        <div class="text-justify text-md">
+                            You can now see clearly which classes have available seats or
+                            can be waitlisted with a new color-coded design. You no longer have to strain your eyes
+                            reading confusing numbers in arbitrary columns to find your classes. We are thinking of ways
+                            to further simply this in the future.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hidden md:block bg-green-700 custom-shape-divider-bottom-1630533354">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                class="shape-fill"></path>
+        </svg>
+    </div>
+    <div class="bg-gray-800 pb-4">
         <div class="container mx-auto">
-            <div class="font-bold text-white text-center text-3xl">Our Team shall Prevail</div>
-            <div class="grid grid-cols-1 md:grid-cols-2 py-5 gap-10">
-                <div class="content-center bg-white shadow-2xl p-5 rounded-lg flex flex-col md:flex-row gap-5">
-                    <div class="items-center flex-initial flex flex-row md:flex-col justify-center gap-3">
-                        <img class="rounded-full w-32" src="henry_face.jpg">
-                        <div class="text-center font-bold">Henry Le Berre</div>
+            <div class="font-bold text-white text-center text-3xl py-4">Our Team shall Prevail</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="content-center bg-white shadow-2xl p-5 rounded-lg flex flex-col md:flex-row gap-2 md:gap-5">
+                    <div
+                        class="items-center flex-initial flex flex-row md:flex-col justify-between md:justify-center gap-3">
+                        <img class="flex-initial rounded-full w-32" src="henry_face.jpg">
+                        <div class="flex-1 flex flex-col justify-center">
+                            <div class="text-center font-bold">Henry Le Berre</div>
+                        </div>
                     </div>
                     <div class="flex-1 flex flex-col justify-between">
-                        <span class="pb-2 text-justify">I'm the creator and lead programmer of OSCAR+, and a CS-freshman at Georgia Tech. I just moved from Paris, France as I'm a French-American dual-citizen.
-                            Feel free to contact me at any time via email at <a href="mailto:henryleberre@gatech.edu"
-                                class="italic underline">henryleberre@gatech.edu</a> or any other platform, if you have
-                            questions, feedback, or just want to talk!</span>
+                        <span class="pb-2 text-justify">
+                            I'm the creator and lead programmer of OSCAR+, and a CS-freshman
+                            at Georgia Tech. I just moved from Paris, France as I'm a French-American dual-citizen.
+                            Feel free to contact me at any time via email at
+                            <a href="mailto:henryleberre@gatech.edu" class="italic underline">henryleberre@gatech.edu</a>
+                            or any other platform, if you have
+                            questions, feedback, or just want to talk!
+                        </span>
                         <div
                             class="border-1 border-t border-black pt-2 text-center font-bold flex flex-row justify-center gap-2">
                             <a href="https://github.com/henryleberre" target="_blank">
@@ -186,7 +251,6 @@
             </div>
         </div>
     </div>
-
 </body>
 
 </html>
