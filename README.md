@@ -1,6 +1,6 @@
 <h1 align="center">GT UI</h1>
 
-## Get it [here](https://henryleberre.github.io/GT-UI/)
+## Get it on our website [https://henryleberre.github.io/GT-UI/](https://henryleberre.github.io/GT-UI/)
 
 ## Our mission
 
@@ -10,30 +10,29 @@ This projectly was originaly conveived as part of a group project for our GT 100
 
 ## Building
 
-If on Windows, please install WSL2.
+We currently require a UNIX-based and BASH-like developpment environment, supporting the following packages. If you are on windows 10 or higher, you can download and install WSL as well as a distro, to obtain a suitable developpment environment.
 
-Required packages:
-+ Debian: `sudo apt install git make zip imagemagick npm`
-+ Arch: `sudo pacman -S git make zip imagemagick npm`
-+ All: `npm install --global web-ext purgecss`
+Here is a guide for installing the required dependencies:
++ APT:    `sudo apt install git make zip imagemagick npm && npm install --global web-ext purgecss`
++ PACMAN: `sudo pacman   -S git make zip imagemagick npm && npm install --global web-ext purgecss`
 
-The root Makefile is responsible for generating "builds" of the extension for each browser platform. Its default target generates for all platforms. It creates a directory `_build` where generates the sources files for each platform in `_build/src/<platform>`, and outputs the packed versions as `_build/<platform>.zip`.
+The root Makefile is responsible for generating "builds" of the extension for each browser platform. Its default target generates builds for all platforms. It creates a directory `build` where generates source files trees, packed source versions, and signed versions.
 
 ## About manifests
 
-Chrome encourages the use of Manifest v3 whilst Firefox hasn't completed its implementation of the standard, only supporting v2 for now. Consequently, we are required to maintain two seperate versions of our `manifest.json`.
+Chrome encourages the use of Manifest v3 whilst Firefox hasn't completed its implementation of the standard, only supporting v2 for now. Consequently, we are required to maintain two seperate versions of our `manifest.json`. The review-team has been wonderful.
 
 ## Distribution
 
 ### Chromium Forks
 
-It is listed as an extension on the Chrome Webstore. Reviews often take a day or so.
+The extension is listed as an extension on the Chrome Webstore. I believe you can download the packed .crx file from Google to ensure it's legitimate. 
 
 ### Firefox Forks
 
-The extension is self-hosted on our website because Mozilla has a rather tedious review process. For example, I was asked to make my main content script run DOMPurify to sanitize the HTML it is processing - which is utterly ridiculous. Furthemore, not being able to comply with their guideline that requires me to provide them login credentials to try out the extension, I was compelled to host it myself.
+The extension is self-hosted on our website because Mozilla has a rather tedious review process. For example, I was asked to make my main content script run DOMPurify to sanitize the HTML it is processing - which is utterly ridiculous. Furthermore, Mozilla refused to host the extension for it was "too niche". I was compelled to host it myself.
 
-I generate the signed .xpi extension archived using my Mozilla API keys - using the Makefile's `firefox_publish` target - which are excluded from the public source tree (and source control for that matter) for obvious security concerns. They currently reside in the /keys/ subdirectory. (View .gitignore).
+I generate the signed .xpi extension archive using my Mozilla API keys - using the Makefile's `firefox_publish` target - which are excluded from the public source tree (and source control for that matter) for obvious security concerns. They currently reside in the /keys/ subdirectory. (View .gitignore).
 
 Your are able to unpack the .xpi file - as a regular archive - to ensure it is legitimate.
 
