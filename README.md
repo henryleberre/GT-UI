@@ -20,13 +20,13 @@ The root Makefile is responsible for generating "builds" of the extension for ea
 
 ## About manifests
 
-Chrome encourages the use of Manifest v3 whilst Firefox hasn't completed its implementation of the standard, only supporting v2 for now. Consequently, we are required to maintain two seperate versions of our `manifest.json`. The review-team has been wonderful.
+Chrome encourages the use of Manifest v3 whilst Firefox hasn't completed its implementation of the standard, only supporting v2 for now. Consequently, we are required to maintain two seperate versions of our `manifest.json`.
 
 ## Distribution
 
 ### Chromium Forks
 
-The extension is listed as an extension on the Chrome Webstore. I believe you can download the packed .crx file from Google to ensure it's legitimate. 
+The extension is listed as an extension on the Chrome Webstore. I believe you can download the packed .crx file from Google to ensure it's legitimate. The review-team has been wonderful.
 
 ### Firefox Forks
 
