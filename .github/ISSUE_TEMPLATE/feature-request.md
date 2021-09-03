@@ -13,7 +13,7 @@ To avoid unnecessary duplication, please verify - to the best of your ability or
 **Tell us all about it**
 If there is an overarching problem you are facing please describe it, as well as a solution to the said problem - if applicable - you have found.
 
-*Any alternatives?**
+**Any alternatives?**
 If you have more ideas of ways or approaches to solving your issue, please tell us about it here.
 
 **Additional context**
