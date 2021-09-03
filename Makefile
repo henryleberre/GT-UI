@@ -32,15 +32,16 @@ chromium: build_common
 	cp -R ./build/common/. ./build/src/chromium
 	cp ./manifests/v3.json ./build/src/chromium/manifest.json
 	cd ./build/src/chromium/ && zip -qq -r9 ./../../zip/chromium.zip ./
+	cp ./build/zip/chromium.zip ./build/dist/Chromium.zip
 
 firefox: build_common
-	mkdir -p ./build/src/firefox
 	cp -R ./build/common/. ./build/src/firefox
 	cp ./manifests/v2.json ./build/src/firefox/manifest.json
 	cd ./build/src/firefox/ && zip -qq -r9 ./../../zip/firefox.zip ./
+	cd ./build/dist/ && mv *.xpi Firefox.xpi
+	rm ./build/src/firefox/.web-extension-id
+	rm -rf ./build/src/firefox/web-ext-artifacts
 
 firefox_publish: firefox
-	mkdir -p ./build/dist/firefox
 	cd ./build/src/firefox && web-ext sign --api-key=$$(cat ../../../keys/firefox_api_key.txt) --api-secret=$$(cat ../../../keys/firefox_api_secret.txt) --channel=unlisted
-	cp -a ./build/src/firefox/web-ext-artifacts ./dist/firefox/
-	cp ./build/src/firefox/.web-extension-id ./dist/firefox/
+	cp -a ./build/src/firefox/web-ext-artifacts ./build/dist/
