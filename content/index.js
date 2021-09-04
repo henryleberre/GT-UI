@@ -149,9 +149,17 @@ function GenerateGridMenu() {
                     // Turn lists (of ";" seperated values) into actual <ul><li> ones
                     let list = CreateChildOfType(cardBodyElem, "ul", "", "", "");
 
+                    let bFirstRow = true;
                     for (let listElementText of descriptionTextRaw.split(';')) {
-                        let listElement = CreateChildOfType(list, "li", "", "border-b border-black list-none rounded-sm px-3 py-3", "");
+                        let listElement = CreateChildOfType(list, "li", "", "text-md border-black list-none rounded-sm px-3 py-3", "");
+
+                        if (!bFirstRow) {
+                            listElement.classList.add("border-t");
+                        }
+
                         listElement.innerText = listElementText;
+
+                        bFirstRow = false;
                     }
                 } else {
                     // Otherwise, simply paste the description text
