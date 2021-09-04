@@ -40,7 +40,7 @@ firefox: build_common
 	cd ./build/src/firefox/ && zip -qq -r9 ./../../zip/Firefox.zip ./
 
 firefox_publish: firefox
-	cd ./build/src/firefox && web-ext sign --api-key=$$(cat ../../../keys/firefox_api_key.txt) --api-secret=$$(cat ../../../keys/firefox_api_secret.txt) --channel=unlisted
+	cd ./build/src/firefox && web-ext sign --api-key=$$(cat ../../../keys/firefox_api_key.key) --api-secret=$$(cat ../../../keys/firefox_api_secret.key) --channel=unlisted
 	cd ./build/dist/ && mv *.xpi Firefox.xpi
 	rm ./build/src/firefox/.web-extension-id
 	rm -rf ./build/src/firefox/web-ext-artifacts
