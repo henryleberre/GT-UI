@@ -20,17 +20,14 @@ jobs:
           sudo apt install -y make zip imagemagick npm
           npm install --global purgecss
 
-      - name: Build Chrome
-        run: make chromium
+      - name: Build Chrome & Firefox
+        run: make chromium firefox
 
       - name: Upload Chromium Artifact
         uses: actions/upload-artifact@v2
         with: 
           name: DEV-ZIP-Chromium
           path: build/zip/Chromium.zip
-      
-      - name: Build Firefox
-        run: make firefox
 
       - name: Upload Firefox Artifact
         uses: actions/upload-artifact@v2
