@@ -1,0 +1,39 @@
+name: CI Dev
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  ci_dev_chromium_firefox:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Fetch Dependencies
+        run: |
+          sudo apt install -y make zip imagemagick npm
+          npm install --global purgecss
+
+      - name: Build Chrome
+        run: make chromium
+
+      - name: Upload Chromium Artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: DEV-ZIP-Chromium
+          path: build/zip/Chromium.zip
+      
+      - name: Build Firefox
+        run: make firefox
+
+      - name: Upload Firefox Artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: DEV-ZIP-Firefox
+          path: build/zip/Firefox.zip
