@@ -1,10 +1,10 @@
-name: CI Release
+name: CD
 
 on:
   workflow_dispatch:
 
 jobs:
-  ci_release_chromium_firefox:
+  cd_chromium_firefox:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,13 +28,13 @@ jobs:
       - name: Upload Firefox ZIP Artifact
         uses: actions/upload-artifact@v2
         with: 
-          name: REL-ZIP-Firefox
+          name: CD-ZIP-Firefox
           path: build/zip/Firefox.zip
       
-      - name: Upload Firefox DIST Artifact
+      - name: Upload Firefox XPI Artifact
         uses: actions/upload-artifact@v2
         with: 
-          name: REL-DIST-Firefox
+          name: CD-XPI-Firefox
           path: build/dist/Firefox.xpi
       
       - run: |
