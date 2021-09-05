@@ -1,4 +1,4 @@
-name: CI Dev
+name: CI
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci_dev_chromium_firefox:
+  ci_chromium_firefox:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,11 +26,11 @@ jobs:
       - name: Upload Chromium Artifact
         uses: actions/upload-artifact@v2
         with: 
-          name: DEV-ZIP-Chromium
+          name: CI-ZIP-Chromium
           path: build/zip/Chromium.zip
 
       - name: Upload Firefox Artifact
         uses: actions/upload-artifact@v2
         with: 
-          name: DEV-ZIP-Firefox
+          name: CI-ZIP-Firefox
           path: build/zip/Firefox.zip
