@@ -1,23 +1,19 @@
-<p align="center"><a href="https://henryleberre.github.io/GT-UI">Get OSCAR+</a></p>
+<h2 align="center"><a href="https://henryleberre.github.io/GT-UI">Get OSCAR+</a></h2>
 <p align="center">OSCAR+ improves the look and feel of Georgia Tech's OSCAR</p>
 <p align="center"><i>"OSCAR like it's 2021" - <a href="https://github.com/henryleberre">@henryleberre</a></i></p>
 
-For marketing material, please refer to [our website](https://henryleberre.github.io/GT-UI), and posts.
-
 ## 1. Joining the team
 
-Feel free to open pull requests, issues, and contact me directly through my [academic email](mailto:henryleberre@gatech.edu) or social media profiles.
+Feel free to open pull requests, issues, and to contact me directly through my [academic email](mailto:henryleberre@gatech.edu) and social media profiles.
 
 ## 2. Getting up and running
 
 ### 2-a) Development Environment
 
-OS  | Steps
---- | ---   
-Windows* | [Get the Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10), [Get Ubuntu for WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6), and follow Ubuntu steps
-Ubuntu | ```sudo apt install -y git make zip imagemagick npm && npm install --global web-ext purgecss```
-Arch   | ```sudo pacman -S git make zip imagemagick npm && npm install --global web-ext purgecss```
-MacOS  | Pending Support
+OS  | Steps | OS  | Steps
+--- | ---   | --- | --
+Windows | <ul><li>[Get the Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)</li><li>[Get Ubuntu for WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6)</li><li>Follow Steps for Ubuntu</li></ul> | MacOS | Pending Support
+Ubuntu | <ul><li>`sudo apt install -y git make zip imagemagick npm`</li><li>`npm install --global web-ext purgecss`</li></ul> | Arch   | <ul><li>`sudo pacman -S git make zip imagemagick npm`</li><li>`npm install --global web-ext purgecss`</li></ul>
 
 <sub><i>*Only works on modern builds of Windows 10 and 11</i></sub>
 
@@ -37,7 +33,7 @@ This technical presentation's scope is purposefully limited to the design of OSC
 
 ### 3-b) Modifying OSCAR's UI
 
-Our - minified and reduced thanks to [PurgeCSS](https://github.com/FullHuman/purgecss) - CSS library, and main content script get loaded whenever a user visits OSCAR, which loads an HTML template, which we fill the DOM's current elements after page loading. Then, we simply replace the DOM with the previously created and filled template. We then apply some more logic to further improve the page's esthetics, prettifying menus, and class registration pages.
+Our - minified and reduced thanks to [PurgeCSS](https://github.com/FullHuman/purgecss) - CSS library ([TailwindCSS](https://github.com/tailwindlabs/tailwindcss)), and main content script get loaded whenever a user visits OSCAR, which loads an HTML template, which we fill the DOM's current elements after page loading. Then, we simply replace the DOM with the previously created and filled template. We then apply some more logic to further improve the page's esthetics, prettifying menus, and class registration pages.
 
 ### 3-c) Build Process
 
