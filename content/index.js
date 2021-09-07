@@ -59,7 +59,7 @@ async function InsertTemplate() {
     });
 
     // Load Template
-    document.body.innerHTML = await LoadFileContents("content/index.html");    
+    document.body.innerHTML = await LoadFileContents("main/index.html");    
 
     // Insert OSCAR's Body Elements Into The Template
     bodyNodes.forEach((e) => {
@@ -71,11 +71,11 @@ async function InsertTemplate() {
 
 function InsertLogoSRCs() {
     GetElementByIdAndDo("GTUI_gtLogo", (e) => {
-        e.src = GetExtensionURL("res/gt-logo.svg");
+        e.src = GetExtensionURL("main/gt-logo.svg");
     });
 
     GetElementByIdAndDo("GTUI_githubLogo", (e) => {
-        e.src = GetExtensionURL("res/github-logo.svg");
+        e.src = GetExtensionURL("main/github-logo.svg");
     });
 }
 

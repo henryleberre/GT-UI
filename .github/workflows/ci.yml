@@ -17,20 +17,22 @@ jobs:
 
       - name: Fetch Dependencies
         run: |
-          sudo apt install -y make zip imagemagick npm
+          sudo apt install -y python3 python3-pip npm
           npm install --global purgecss
-
-      - name: Build Chrome & Firefox
-        run: make chromium firefox
+          pip install Pillow
+      
+      - name: Build
+        run: |
+          pyhon build.py
 
       - name: Upload Chromium Artifact
         uses: actions/upload-artifact@v2
         with: 
           name: CI-ZIP-Chromium
-          path: build/zip/Chromium.zip
+          path: build/Chromium.zip
 
       - name: Upload Firefox Artifact
         uses: actions/upload-artifact@v2
         with: 
           name: CI-ZIP-Firefox
-          path: build/zip/Firefox.zip
+          path: build/Firefox.zip

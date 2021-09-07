@@ -1,0 +1,32 @@
+{
+    "name": "OSCAR+",
+    "version": "2.0",
+    "icon": {
+        "filename": "res/icon.png",
+        "sizes": ["16", "32", "48", "64", "128"]
+    },
+    "permissions": ["storage"],
+    "content_scripts": [{
+        "id": "main",
+        "matches": [
+            "https://oscar.gatech.edu/*"
+        ],
+        "loads": [
+            "content/index.js",
+            "libs/tailwind.min.css"
+        ],
+        "accesses": [
+            "content/index.html",
+            "res/gt-logo.svg",
+            "res/github-logo.svg"
+        ]
+    }],
+    "popup": [ "popup/index.html", "popup/index.js", "libs/tailwind.min.css", "popup/github_white_icon.png" ],
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{5c7a5cfb-c809-4f1d-9e7a-3eeebf72e191}",
+            "update_url": "https://henryleberre.github.io/GT-UI/updates.json"
+        }
+    }
+}
