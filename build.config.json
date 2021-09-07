@@ -1,9 +1,9 @@
 {
     "name": "OSCAR+",
-    "version": "2.0",
+    "version": "2.1",
     "icon": {
         "filename": "res/icon.png",
-        "sizes": ["16", "32", "48", "64", "128"]
+        "sizes": [16, 32, 48, 64, 128]
     },
     "permissions": ["storage"],
     "content_scripts": [{
@@ -23,10 +23,30 @@
     }],
     "popup": [ "popup/index.html", "popup/index.js", "libs/tailwind.min.css", "popup/github_white_icon.png" ],
 
-    "browser_specific_settings": {
-        "gecko": {
-            "id": "{5c7a5cfb-c809-4f1d-9e7a-3eeebf72e191}",
-            "update_url": "https://henryleberre.github.io/GT-UI/updates.json"
+    "publish": {
+        "key_directory_path": "keys/"
+    },
+
+    "browsers": [
+        {
+            "name": "Firefox",
+            "manifest_version": 2,
+            "extension_id": "{5c7a5cfb-c809-4f1d-9e7a-3eeebf72e191}",
+            "self_host": true,
+            "params": {
+                "updates.release_url": "https://github.com/henryleberre/GT-UI/releases/latest/download/Firefox.xpi",
+                "updates.json_url":    "https://henryleberre.github.io/GT-UI/updates.json",
+                "updates.json_path":   "docs/updates.json"
+            }
+        },
+        {
+            "name": "Chromium",
+            "self_host": false,
+            "manifest_version": 3,
+            "extension_id": "fcjdbonkjmoampkihabopmahicdimcee",
+            "params": {
+                "key_directory_path": "keys/"
+            }
         }
-    }
+    ]
 }
