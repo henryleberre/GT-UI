@@ -10,12 +10,10 @@ Feel free to open pull requests, issues, and to contact me directly through my [
 
 ### 2-a) Development Environment
 
-OS  | Steps | OS  | Steps
---- | ---   | --- | --
-Windows | <ul><li>[Get the Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)</li><li>[Get Ubuntu for WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6)</li><li>Follow Steps for Ubuntu</li></ul> | MacOS | Pending Support
-Ubuntu | <ul><li>`sudo apt install -y git make zip imagemagick npm`</li><li>`npm install --global web-ext purgecss`</li></ul> | Arch   | <ul><li>`sudo pacman -S git make zip imagemagick npm`</li><li>`npm install --global web-ext purgecss`</li></ul>
-
-<sub><i>*Only works on modern builds of Windows 10 and 11</i></sub>
+```
+npm install --global web-ext purgecss
+pip install tqdm google-api-python-client
+```
 
 ### 2-b) Clone the repository
 
@@ -23,7 +21,7 @@ Navigate to your desired directory and run `git clone --recursive https://github
 
 ### 2-c) Build
 
-Run `make clean chromium` to generate a development version of OSCAR+ compatible with Chrome (any Chromium derivative), in the `build` directory. You can now open Chrome, navigate to the extensions page, enable Developer Mode, and click on "Load Unpacked", selecting the file `build/zip/Chromium.zip`.
+Run `python3 build.py` to generate a development version of OSCAR+ compatible with Chrome (any Chromium derivative), in the `build` directory. You can now open Chrome, navigate to the extensions page, enable Developer Mode, and click on "Load Unpacked", selecting the file `build/zip/Chromium.zip`.
 
 ## 3. Technical Presentation
 
@@ -37,15 +35,15 @@ Our - minified and reduced thanks to [PurgeCSS](https://github.com/FullHuman/pur
 
 ### 3-c) Build Process
 
-Our Makefile's targets generate builds for all supported browsers, by selecting, generating, purging, and minifying different files from the main source tree into a coherent folder structure for each target browser. Please read the [Makefile](Makefile) for extended information and a list of supported targets. For instance, it generates a series of different sized icons from a single high resolution icon. The Makefile also generates zip files for each target, and is able to sign and publish builds if you have the appropriate cryptographic keys - which you shall not!
+Our `build.py` script generate builds for all supported browsers, by selecting, generating, purging, and minifying different files from the main source tree into a coherent folder structure for each target browser, depending on the configuration file `build.config.json`. Please read these files for extended information and a list of supported targets. For instance, it generates a series of different sized icons from a single high resolution icon. The script also generates zip files for each target, and is able to sign and publish builds if you have the appropriate cryptographic keys - which you shall not!
 
 ### 3-d) Browser Support & Distribution
 
-As of writing, Chrome encourages the use of Manifest v3 whilst Firefox hasn't completed its implementation of the standard, only supporting v2 for now. As a result, we are required to maintain two seperate versions of our `manifest.json` in the `manifests/` folder.
+As of writing, Chrome encourages the use of Manifest v3 whilst Firefox hasn't completed its implementation of the standard, only supporting v2 for now. As a result, our build script generates two versions, one for firefox and one for chromium.
 
 + **Chromium and its forks:** The extension is publicly listed on the Google Chrome Web Store. After publishing the zip archive for a new release, the review process is concerningly fast, being sometimes immediate.
 
-+ **Firefox and its forks:** The extension is self-hosted on our website because Mozilla has a rather tedious review process. For instance, we were asked to make my main content script run DOMPurify to sanitize the HTML it is processing - which is utterly ridiculous. Furthermore, Mozilla refused to host the extension for it was "too niche". I was compelled to host it myself. I generate the signed .xpi extension archive using my Mozilla API keys using the Makefile's `firefox_publish` target. Clicking on the Firefox icon to download the extension our website simply links to the .xpi extension file in our latest GitHub release. Your are able to unpack the .xpi file - as a regular archive - to ensure it is legitimate and trustworthy.
++ **Firefox and its forks:** The extension is self-hosted on our website because Mozilla has a rather tedious review process. For instance, we were asked to make my main content script run DOMPurify to sanitize the HTML it is processing - which is utterly ridiculous. Furthermore, Mozilla refused to host the extension for it was "too niche". I was compelled to host it myself. I generate the signed .xpi extension archive using my Mozilla API keys using the script `publish.py` target. Clicking on the Firefox icon to download the extension our website simply links to the .xpi extension file in our latest GitHub release. Your are able to unpack the .xpi file - as a regular archive - to ensure it is legitimate and trustworthy.
 
 + **Safari:** We're working on it.
 

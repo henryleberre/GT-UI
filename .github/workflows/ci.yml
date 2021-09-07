@@ -19,7 +19,7 @@ jobs:
         run: |
           sudo apt install -y python3 python3-pip npm
           npm install --global purgecss
-          pip install Pillow
+          pip install Pillow tqdm
       
       - name: Build
         run: |
