@@ -10,9 +10,21 @@ Feel free to open pull requests, issues, and to contact me directly through my [
 
 ### 2-a) Development Environment
 
+Depending on your operating system, please run:
+
 ```
-npm install --global web-ext purgecss
-pip install tqdm google-api-python-client
+sudo apt install python3 python3-pip npm # Debian, Ubuntu, Pop!OS, and Mint
+sudo pacman -S python python-pip npm     # Arch :)
+brew install git python npm              # MacOS *(2)
+```
+
+<sup><i>\*(1) On Windows, please use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) and a Linux distribution like [Ubuntu](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab). \*(2) On MacOS, please install [Homebrew](https://brew.sh/).</i></up>
+
+In all cases:
+
+```
+npm install -g web-ext purgecss
+pip install Pillow tqdm google-api-python-client
 ```
 
 ### 2-b) Clone the repository
