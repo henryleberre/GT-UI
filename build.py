@@ -109,6 +109,7 @@ def build_common():
     MANIFEST_COMMON = {
         "name":            get_with_key_or     (CONFIG, "name",    "build.config.json doesn't have a name field"),
         "version":         get_with_key_or_fail(CONFIG, "version", "build.config.json doesn't have a version field"),
+        "description":     get_with_key_or     (CONFIG, "description", ""),
         "permissions":     get_with_key_or     (CONFIG, "permissions", {}),
         "icons":           {},
         "content_scripts": []
@@ -155,6 +156,7 @@ def build_common():
     # Create POPUP_OBJ_COMMON
     POPUP_OBJ_COMMON["default_title"] = CONFIG["name"]
     POPUP_OBJ_COMMON["default_popup"] = "popup/" + get_filename(filter_ends_with(CONFIG["popup"], [".html"])[0])
+    POPUP_OBJ_COMMON["default_icon"]  = MANIFEST_COMMON["icons"]
 
 def build_for_browser(browser_obj):
     global CONFIG

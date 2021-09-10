@@ -1,11 +1,14 @@
 let browserHandle   = (typeof browser != 'undefined') ? browser : chrome;
-let GetExtensionURL = browserHandle.runtime.getURL;
 
 const COLOR_CLASSES = {
     "SUCCESS": "bg-green-200",
     "WARNING": "bg-yellow-200",
     "ERROR":   "bg-red-200"
 };
+
+function GetExtensionURL(filepath) {
+    return browserHandle.runtime.getURL(filepath);
+}
 
 async function LoadFileContents(filename) {
     let fetched = await fetch(GetExtensionURL(filename));
@@ -67,6 +70,20 @@ async function InsertTemplate() {
             pageContentElem.appendChild(e);
         });
     });
+
+    
+    // Please view to Apple's WWDC2021: "Design for Safari 15"
+    let respMeta = document.createElement("meta");
+    respMeta.setAttribute("name", "viewport");
+    respMeta.setAttribute("content", "width=device-width, initial-scale=1");
+    
+    document.head.appendChild(respMeta);
+    
+    let themeMeta = document.createElement("meta");
+    themeMeta.setAttribute("name", "theme-color");
+    themeMeta.setAttribute("content", "rgb(38, 38, 38)");
+    
+    document.head.appendChild(themeMeta);
 }
 
 function InsertLogoSRCs() {

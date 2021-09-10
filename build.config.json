@@ -1,6 +1,7 @@
 {
     "name": "OSCAR+",
     "version": "2.1",
+    "description": "OSCAR+ improves the look and feel of Georgia Tech's OSCAR.",
     "icon": {
         "filename": "res/icon.png",
         "sizes": [16, 32, 48, 64, 128]
