@@ -1,3 +1,4 @@
 __pycache__/
 build/
-keys/*.key
+keys/*
+!keys/README.md

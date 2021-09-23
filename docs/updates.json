@@ -1,36 +1,36 @@
 {
-  "addons": {
-    "{5c7a5cfb-c809-4f1d-9e7a-3eeebf72e191}": {
-      "updates": [
-        {
-          "version": "1.4",
-          "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.4/Firefox.xpi"
-        },
-        {
-          "version": "1.5",
-          "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.5/Firefox.xpi"
-        },
-        {
-          "version": "1.6",
-          "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.6/Firefox.xpi"
-        },
-        {
-          "version": "1.7",
-          "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.7/Firefox.xpi"
-        },
-        {
-          "version": "1.8",
-          "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.8/Firefox.xpi"
-        },
-        {
-          "version": "1.9",
-          "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.9/Firefox.xpi"
-        },
-        {
-          "version": "2.0",
-          "update_link": "https://github.com/henryleberre/GT-UI/releases/download/2.0/Firefox.xpi"
+    "addons": {
+        "{5c7a5cfb-c809-4f1d-9e7a-3eeebf72e191}": {
+            "updates": [
+                {
+                    "version": "1.4",
+                    "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.4/Firefox.xpi"
+                },
+                {
+                    "version": "1.5",
+                    "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.5/Firefox.xpi"
+                },
+                {
+                    "version": "1.6",
+                    "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.6/Firefox.xpi"
+                },
+                {
+                    "version": "1.7",
+                    "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.7/Firefox.xpi"
+                },
+                {
+                    "version": "1.8",
+                    "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.8/Firefox.xpi"
+                },
+                {
+                    "version": "1.9",
+                    "update_link": "https://github.com/henryleberre/GT-UI/releases/download/1.9/Firefox.xpi"
+                },
+                {
+                    "version": "2.0",
+                    "update_link": "https://github.com/henryleberre/GT-UI/releases/download/2.0/Firefox.xpi"
+                }
+            ]
         }
-      ]
     }
-  }
 }
