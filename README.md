@@ -59,11 +59,7 @@ As of writing, Chrome encourages the use of Manifest v3 whilst Firefox hasn't co
 
 + **Safari:** We're working on it.
 
-## 4. License
-
-This project is licensed under the [MIT License](LICENSE.md).
-
-## 5. References
+## 4. References
 
 + [OSCAR+'s Website](https://henryleberre.github.io/GT-UI)
 + [Georgia Tech's Official Colors](https://brand.gatech.edu/our-look/colors)
