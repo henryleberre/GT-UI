@@ -23,7 +23,7 @@
         }
 
         .custom-shape-divider-top-1630533911 .shape-fill {
-            fill: #1F2937;
+            fill: rgb(16, 16, 16);
         }
 
         .custom-shape-divider-bottom-1630533354 {
@@ -41,7 +41,7 @@
         }
 
         .custom-shape-divider-bottom-1630533354 .shape-fill {
-            fill: #1F2937;
+            fill: rgb(32, 32, 32);
         }
 
         .custom-shape-divider-bottom-1630590292 {
@@ -59,21 +59,21 @@
         }
 
         .custom-shape-divider-bottom-1630590292 .shape-fill {
-            fill: #047857;
+            fill: rgb(32, 32, 32);
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-indigo-700 flex flex-col" style="min-height: 100vh; height: 100%;">
-        <header class="bg-gray-800 flex-none py-0 md:py-5 w-full flex-1">
+    <div class="flex flex-col" style="min-height: 100vh; height: 100%; background-color: rgb(16,16,16);">
+        <header class="flex-none py-0 md:py-5 w-full flex-1" style="background-color: rgb(16,16,16);">
             <nav class="md:justify-start py-5 mx-auto flex mx-auto container items-center gap-5">
                 <div class="pl-3 md:pl-0 flex-1 text-3xl text-white font-extrabold">OSCAR+</div>
-                <div class="pr-3 md:pr-0 flex flex-row gap-5">
-                    <a class="w-10" target="_blank" href="https://www.linkedin.com/in/henryleberre/"><img width="48"
-                            src="linkedin_icon.png"></a>
-                    <a class="w-10" target="_blank" href="http://github.com/henryleberre/GT-UI"><img width="48"
-                            src="github_white_icon.png"></a>
+                <div class="pr-3 md:pr-0 flex flex-row gap-14 justify-between text-xl text-white">
+                    <a class="w-10 flex-1 hover:text-gray-300 duration-200" target="_blank"
+                        href="https://www.linkedin.com/in/henryleberre/">Lindedin</a>
+                    <a class="w-10 flex-1 hover:text-gray-300 duration-200" target="_blank"
+                        href="http://github.com/henryleberre/GT-UI">GitHub</a>
                 </div>
             </nav>
         </header>
@@ -166,86 +166,54 @@
             </svg>
         </div>
     </div>
-    <div class="bg-green-700 py-4">
+    <div class="py-4 text-white" style="background-color: rgb(32,32,32);">
         <div class="container mx-auto flex flex-col">
             <div class="text-white font-bold text-center text-3xl pb-4">Key Features</div>
-            <div class="bg-white rounded-xl p-4">
-                <div class="flex flex-col md:flex-row gap-2 md:gap-5">
-                    <div class="flex-1 flex flex-col justify-center">
-                        <img class="rounded-lg" src="screenshot_1.jpg">
-                    </div>
-                    <div class="flex-1 flex flex-col justify-center gap-2 md:gap-5 pr-4">
-                        <div class="text-center font-bold text-xl">A Modern User Interface</div>
-                        <div class="text-justify text-md">
-                            Menus now span and fill your entire screen to provide a more seamless navigation experience
-                            throughout all of OSCAR.
-                        </div>
+            <div class="flex flex-col md:flex-row gap-2 md:gap-5">
+                <div class="flex-1 flex flex-col justify-center">
+                    <img class="rounded-lg" src="screenshot_1.jpg">
+                </div>
+                <div class="flex-1 flex flex-col justify-center gap-2 md:gap-5 pr-4">
+                    <div class="text-center font-bold text-xl">A Modern User Interface</div>
+                    <div class="text-justify text-md">
+                        Menus now span and fill your entire screen to provide a more seamless navigation experience
+                        throughout all of OSCAR.
                     </div>
                 </div>
-                <div class="border-1 border-t border-black my-4"></div>
-                <div class="flex flex-col md:flex-row gap-2 md:gap-5">
-                    <div class="flex-1 flex flex-col justify-center">
-                        <img class="rounded-lg" src="screenshot_2.jpg">
-                    </div>
-                    <div class="flex-1 flex flex-col justify-center gap-2 md:gap-5 pr-4">
-                        <div class="text-center font-bold text-xl">Register For Classes Like A Magician</div>
-                        <div class="text-justify text-md">
-                            You can now see clearly which classes have available seats or
-                            can be waitlisted with a new color-coded design. You no longer have to strain your eyes
-                            reading confusing numbers in arbitrary columns to find your classes. We are thinking of ways
-                            to further simply this in the future.
-                        </div>
+            </div>
+            <div class="border-1 border-t border-white my-4"></div>
+            <div class="flex flex-col md:flex-row gap-2 md:gap-5">
+                <div class="flex-1 flex flex-col justify-center">
+                    <img class="rounded-lg" src="screenshot_2.jpg">
+                </div>
+                <div class="flex-1 flex flex-col justify-center gap-2 md:gap-5 pr-4">
+                    <div class="text-center font-bold text-xl">Register For Classes Like A Magician</div>
+                    <div class="text-justify text-md">
+                        You can now see clearly which classes have available seats or
+                        can be waitlisted with a new color-coded design. You no longer have to strain your eyes
+                        reading confusing numbers in arbitrary columns to find your classes. We are thinking of ways
+                        to further simply this in the future.
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="hidden md:block bg-green-700 custom-shape-divider-bottom-1630533354">
+    <div class="hidden md:block custom-shape-divider-bottom-1630533354" style="background-color: rgb(32,32,32);">
         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path
                 d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
                 class="shape-fill"></path>
         </svg>
     </div>
-    <div class="bg-gray-800 pb-4">
+    <div class="pb-4" style="background-color: rgb(16,16,16);">
         <div class="container mx-auto">
             <div class="font-bold text-white text-center text-3xl py-4">Our Team shall Prevail</div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="content-center bg-white shadow-2xl p-5 rounded-lg flex flex-col md:flex-row gap-2 md:gap-5">
-                    <div
-                        class="items-center flex-initial flex flex-row md:flex-col justify-between md:justify-center gap-3">
-                        <img class="flex-initial rounded-full w-32" src="henry_face.jpg">
-                        <div class="flex-1 flex flex-col justify-center">
-                            <div class="text-center font-bold">Henry Le Berre</div>
-                        </div>
-                    </div>
-                    <div class="flex-1 flex flex-col justify-between">
-                        <span class="pb-2 text-justify">
-                            I'm the creator and lead programmer of OSCAR+, and a CS-freshman
-                            at Georgia Tech. I just moved from Paris, France as I'm a French-American dual-citizen.
-                            Feel free to contact me at any time via email at
-                            <a href="mailto:henryleberre@gatech.edu" class="italic underline">henryleberre@gatech.edu</a>
-                            or any other platform, if you have
-                            questions, feedback, or just want to talk!
-                        </span>
-                        <div
-                            class="border-1 border-t border-black pt-2 text-center font-bold flex flex-row justify-center gap-2">
-                            <a href="https://github.com/henryleberre" target="_blank">
-                                <div class="w-6 rounded-full" style="filter: invert(100%);">
-                                    <img src="github_white_icon.png">
-                                </div>
-                            </a>
-                            <a href="https://www.linkedin.com/in/henryleberre/" target="_blank">
-                                <div class="w-6 rounded-full">
-                                    <img src="linkedin_icon.png">
-                                </div>
-                            </a>
-                            <a href="https://www.instagram.com/henryleberre/" target="_blank">
-                                <div class="w-6 rounded-full">
-                                    <img src="instagram_logo.png">
-                                </div>
-                            </a>
-                        </div>
+            <div class="content-center bg-white shadow-2xl p-5 rounded-lg gap-2 md:gap-5">
+                <div
+                    class="items-center flex flex-auto flex-col md:justify-center gap-3">
+                    <img class="flex-initial rounded-full w-32" src="henry.jpg">
+                    <div class="flex-1 flex flex-col justify-center">
+                        <div class="text-center font-bold">Henry Le Berre</div>
                     </div>
                 </div>
             </div>
