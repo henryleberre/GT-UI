@@ -22,7 +22,7 @@
             "res/github-logo.svg"
         ]
     }],
-    "popup": [ "popup/index.html", "popup/index.js", "libs/tailwind.min.css", "popup/github_white_icon.png" ],
+    "popup": [ "popup/index.html", "popup/index.js", "libs/tailwind.min.css" ],
 
     "publish": {
         "key_directory_path": "keys/"
@@ -48,6 +48,11 @@
             "params": {
                 "key_directory_path": "keys/"
             }
+        },
+        {
+            "name": "Apple",
+            "manifest_version": 2,
+            "postRun": "command -v xcrun >/dev/null 2>&1 || { echo \"Apple Environment Not Detected... Aborting\" >&2; exit 1; } && cd build/Apple && xcrun safari-web-extension-converter --no-open --copy-resources ."
         }
     ]
 }
