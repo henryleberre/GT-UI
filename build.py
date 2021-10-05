@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import pathlib, os, json, shutil
+import pathlib, os, json, shutil, subprocess
 
 from tqdm import tqdm
 from PIL  import Image
@@ -190,12 +190,13 @@ def build_for_browser(browser_obj):
             MANIFEST["web_accessible_resources"] += [ "{}/".format(cs["id"]) + get_filename(filepath) for filepath in cs["accesses"] ]
             MANIFEST["web_accessible_resources"] = get_without_duplicates(MANIFEST["web_accessible_resources"])
 
-        if has_key(browser_obj["params"], "browser_specific_settings"):
-            MANIFEST["browser_specific_settings"] = browser_obj["params"]["browser_specific_settings"]
+        if has_key(browser_obj, "params"):
+            if has_key(browser_obj["params"], "browser_specific_settings"):
+                MANIFEST["browser_specific_settings"] = browser_obj["params"]["browser_specific_settings"]
 
         MANIFEST["browser_action"] = POPUP_OBJ_COMMON
 
-        if browser_obj["self_host"]:
+        if get_with_key_or(browser_obj, "self_host", False):
             MANIFEST["browser_specific_settings"] = {
                 "gecko": {
                     "id": browser_obj["extension_id"],
@@ -219,6 +220,9 @@ def build_for_browser(browser_obj):
     # Create Zip Archive
     shutil.make_archive("build/{}".format(browser_obj["name"]), "zip", "build/{}/".format(browser_obj["name"]))
 
+    # Run Post-Build Command
+    os.system(get_with_key_or(browser_obj, "postRun", ""))
+
 def run():
     global CONFIG
 
@@ -231,6 +235,7 @@ def run():
     build_common()
 
     for browser in tqdm(get_with_key_or(CONFIG, "browsers", [])):
+        print("Building {}...".format(get_with_key_or_fail(browser, "name", "Unnamed Build Target")))
         build_for_browser(browser)
 
 if __name__ == "__main__":
