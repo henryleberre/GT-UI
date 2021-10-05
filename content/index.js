@@ -129,10 +129,11 @@ function GenerateGridMenu() {
 
         for (let idx = 0; idx < menuTDs.length; idx++) {
             let cardElem           = CreateChildOfType(menuDiv,        "div",  "", "rounded-xl shadow-2xl flex flex-col",              "");
-            let cardHeaderElem     = CreateChildOfType(cardElem,       "a",    "", "flex text-center text-white text-2xl items-center w-full p-4 rounded-md bg-black hover:bg-yellow-400 transition duration-300", "");
+            let cardHeaderElem     = CreateChildOfType(cardElem,       "a",    "", "flex text-center text-white text-xl items-center w-full p-4 rounded-md bg-black hover:bg-yellow-400 transition duration-300", "");
             let cardHeaderSpanElem = CreateChildOfType(cardHeaderElem, "span", "", "w-full",           "");
-            let cardBodyElem       = CreateChildOfType(cardElem,       "div",  "", "p-4 text-xl text-justify",                         "");
+            let cardBodyElem       = CreateChildOfType(cardElem,       "div",  "", "p-4 text-base text-justify",                         "");
             
+
             cardHeaderElem.href = menuTDs[idx].getElementsByTagName("a")[0].href;
             cardHeaderSpanElem.innerText = "Visit";
 
@@ -168,7 +169,7 @@ function GenerateGridMenu() {
 
                     let bFirstRow = true;
                     for (let listElementText of descriptionTextRaw.split(';')) {
-                        let listElement = CreateChildOfType(list, "li", "", "text-md border-black list-none rounded-sm px-3 py-3", "");
+                        let listElement = CreateChildOfType(list, "li", "", "border-black list-none rounded-sm px-2 py-2", "");
 
                         if (!bFirstRow) {
                             listElement.classList.add("border-t");
@@ -196,7 +197,11 @@ function GenerateGridMenu() {
 
 function GenerateAlerts() {
     GetElementsByClassNameForeach(document, "infotextdiv", (warningElem) => {
-        warningElem.classList.add("bg-yellow-200", "p-5", "rounded-md");
+        warningElem.classList.add("bg-yellow-200", "p-2", "rounded-md", "text-xs");
+
+        for (let child of warningElem.childNodes) {
+            child.classList.add("text-xs");
+        }
     });
 }
 
