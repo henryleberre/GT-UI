@@ -53,7 +53,7 @@ Our `build.py` script generate builds for all supported browsers, by selecting, 
 
 As of writing, Chrome encourages the use of Manifest v3 whilst Firefox hasn't completed its implementation of the standard, only supporting v2 for now. As a result, our build script generates two versions, one for firefox and one for chromium.
 
-+ **Chromium and its forks:** The extension is publicly listed on the Google Chrome Web Store. After publishing the zip archive for a new release, the review process is concerningly fast, being sometimes immediate.
++ **Chromium and its forks:** The extension is publicly listed on the Google Chrome Web Store. After publishing the zip archive for a new release, the review process is fast, being sometimes immediate.
 
 + **Firefox and its forks:** The extension is self-hosted on our website because Mozilla has a rather tedious review process. For instance, we were asked to make my main content script run DOMPurify to sanitize the HTML it is processing - which is utterly ridiculous. Furthermore, Mozilla refused to host the extension for it was "too niche". I was compelled to host it myself. I generate the signed .xpi extension archive using my Mozilla API keys using the script `publish.py` target. Clicking on the Firefox icon to download the extension our website simply links to the .xpi extension file in our latest GitHub release. Your are able to unpack the .xpi file - as a regular archive - to ensure it is legitimate and trustworthy.
 
